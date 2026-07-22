@@ -34,7 +34,7 @@ class Vec:
         return Vec(-self.x, -self.y)
 
     def __pos__(self):
-        return Vec(*self.get)
+        return Vec(*self.get())
 
     def __str__(self):
         return f"vec({self.x}, {self.y})"
