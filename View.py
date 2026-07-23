@@ -41,7 +41,7 @@ class View:
         """
         Load all the images from the directory assets/images/.
         Loads into self.images_full
-         """
+        """
         image_name = file_name.split(".")[0]
         file_name = "assets/images/" + file_name
         image = pg.image.load(file_name)

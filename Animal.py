@@ -6,8 +6,8 @@ from View import View
 
 class Animal:
     
-    def __init__(self,tete : BodyPart,pattes : BodyPart, torse : BodyPart, x, y):
-        self.list_body_parts = {"tete" : tete, "pattes" : pattes, "torse" : torse}
+    def __init__(self, head : BodyPart, legs : BodyPart, torso : BodyPart, x, y):
+        self.list_body_parts = {"head" : head, "legs" : legs, "torso" : torso}
         self.pos_x = x
         self.pos_y = y
         self.dir = "left"
