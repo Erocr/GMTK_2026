@@ -17,9 +17,11 @@ class Model:
     def dna_edit(self):
         col = ['R', 'B', 'V']
         sequences = combinations(col, 8)
-        nbimg = 2 #A UPDATE
+        nbimg = 5 #A UPDATE
         for i in range(nbimg):
-            self.images.append("tail"+ str(i)+".png")
-            self.images.append("torso"+ str(i)+".png")
+            self.images.append("tail_"+ str(i)+".png")
+            self.images.append("body_"+ str(i)+".png")
+            self.images.append("head_"+ str(i)+".png")
+            self.images.append("legs_"+ str(i)+".png")
         for elt in sequences:
             self.dna_image[elt] = self.images[randint(len(self.images))]
