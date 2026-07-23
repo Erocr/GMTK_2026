@@ -5,13 +5,9 @@ from Model import Model
 from View import View
 
 class Animal:
-
-    last_id = 0
     
-    def __init__(self, head : BodyPart,legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y):
-        self.id = self.last_id + 1
-        Animal.last_id += 1
-        self.list_body_parts = {"head" : head, "legs" : legs, "torso" : torso, "tail" : tail}
+    def __init__(self,tete : BodyPart,pattes : BodyPart, torse : BodyPart, x, y):
+        self.list_body_parts = {"tete" : tete, "pattes" : pattes, "torse" : torse}
         self.pos_x = x
         self.pos_y = y
         self.dir = "left"
@@ -142,3 +138,10 @@ class Animal:
             y_speed = -3
         
         self.set_pos(self.pos_x+ x_speed, self.pos_y+ y_speed)
+
+
+    def get_dna(self):
+        dna = ""
+        for body_part in self.list_body_parts:
+            dna += self.list_body_parts[body_part].get_dnasec
+        return dna
