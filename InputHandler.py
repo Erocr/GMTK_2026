@@ -1,4 +1,5 @@
 import pygame as pg
+from Vec import *
 
 
 class Key:
@@ -31,9 +32,9 @@ class InputHandler:
         self._pg_events()
         self.events = {}
         self.quit = False
-        self._mouse_pos = pg.Vector2(0, 0)
-        self._prev_mouse_pos = pg.Vector2(0, 0)
-        self._scroll_direction = pg.Vector2(0, 0)
+        self._mouse_pos = Vec(0, 0)
+        self._prev_mouse_pos = Vec(0, 0)
+        self._scroll_direction = Vec(0, 0)
         self.resized = None
         self.unicode = ""
 
@@ -64,8 +65,8 @@ class InputHandler:
         This method shall be called once per frame
         """
         self._prev_mouse_pos = self._mouse_pos
-        self._mouse_pos = pg.Vector2(*pg.mouse.get_pos())
-        self._scroll_direction = pg.Vector2(0, 0)
+        self._mouse_pos = Vec(*pg.mouse.get_pos())
+        self._scroll_direction = Vec(0, 0)
         self.resized = None
         self.unicode = ""
 
@@ -82,9 +83,9 @@ class InputHandler:
             elif evt.type == pg.MOUSEBUTTONUP:  # The user releases a mouse button
                 self.events.pop(-evt.button)  # The mouse buttons are negative
             elif evt.type == pg.MOUSEWHEEL:  # The user scrolls with the mouse or a touchpad
-                self._scroll_direction = pg.Vector2(evt.x, evt.y)
+                self._scroll_direction = Vec(evt.x, evt.y)
             elif evt.type == pg.VIDEORESIZE:  # The user resizes the window
-                self.resized = pg.Vector2(evt.w, evt.h)
+                self.resized = Vec(evt.w, evt.h)
 
     def key_id(self, key: int | str):
         """
@@ -112,7 +113,7 @@ class InputHandler:
         else:
             return -1
 
-    def resize(self) -> pg.Vector2 | None:
+    def resize(self) -> Vec | None:
         return self.resized
 
     def pressed(self, key: int | str):

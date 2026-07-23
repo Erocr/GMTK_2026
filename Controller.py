@@ -13,3 +13,5 @@ class Controller:
 
     def update(self):
         self.inputHandler.update()
+        if self.inputHandler.resized is not None:
+            self.view.resize(self.inputHandler.resized)
