@@ -8,14 +8,16 @@ class Animal:
 
     last_id = 0
     
-    def __init__(self, head : BodyPart, legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y):
+    def __init__(self, head : BodyPart, legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y, model : Model):
         self.id = self.last_id + 1
         Animal.last_id += 1
         self.list_body_parts = {"head" : head, "legs" : legs, "torso" : torso, "tail" : tail}
+        self.model = model
         self.pos_x = x
         self.pos_y = y
         self.dir = "left"
         self.start = time.time()
+        model.add_animal(self)
 
     def __hash__(self):
         hash(self.id)
@@ -24,6 +26,11 @@ class Animal:
         for bodypart in self.list_body_parts:
             if self.list_body_parts[bodypart] != animal2.list_body_parts[bodypart]: return False
         return True
+
+    def copy(self):
+        copy = Animal(self.list_body_parts["head"], self.list_body_parts["legs"], self.list_body_parts["torso"], self.list_body_parts["tail"], self.x, self.y, self.model)
+        return copy
+        
     
     def set_body_part(self, part : str, new_part : BodyPart):
         self.list_body_parts[part] = new_part
@@ -147,3 +154,27 @@ class Animal:
             y_speed = -3
         
         self.set_pos(self.pos_x+ x_speed, self.pos_y+ y_speed)
+
+    def create_kid(self, part, seq1, seq2, im1, im2):
+        #think to add the kids at tree 
+        p = random.randint(4)
+        """if p == 0 : part = "head"
+        if p == 1 : part = "torso"
+        if p == 2 : part = "legs"
+        if p == 3 : part = "tail" """
+        ind = random.randint(self.list_body_parts[part]//8)
+        kid1, kid2 = self.copy(), self.copy()
+        dna1 = kid1.list_body_parts[part].getdna()
+        dna2 = kid2.list_body_parts[part].getdna()
+        for i in range(0, self.list_body_parts[part], 8):
+            if i == ind:
+                for j in range(8):
+                    dna1[i+j] = seq1[j]
+                    dna2[i+j] = seq2[j]
+            if i<ind:
+                for j in range(8):
+                    dna1[i+j] = self.list_body_parts[part][j]
+                    dna2[i+j] = self.list_body_parts[part][j]
+        kid1.list_body_parts[part].setdna(dna1)
+        kid2.list_body_parts[part].setdna(dna2)
+        return kid1, kid2

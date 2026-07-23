@@ -6,3 +6,6 @@ class Model:
 
     def update(self):
         pass
+
+    def add_animal(self, animal):
+        self.animals.append(animal)
