@@ -43,7 +43,7 @@ class Animal:
         self.pos_x = x
         self.pos_y = y
 
-        if(self.dir ==  "down"):
+        if(self.dir ==  "left"):
             # head (oups)
             self.list_body_parts["head"].set_x(self.pos_x + 2)
             self.list_body_parts["head"].set_y(self.pos_y - 2)
@@ -96,8 +96,6 @@ class Animal:
 
         elif(self.dir == "down"):
             # head (oups)
-            self.list_body_parts["head"].set_x(self.pos_x - 2)
-            self.list_body_parts["head"].set_y(self.pos_y + 2)
             self.list_body_parts["head"].set_x(self.pos_x - 2)
             self.list_body_parts["head"].set_y(self.pos_y + 2)
 
