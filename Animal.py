@@ -5,7 +5,7 @@ from View import View
 
 class Animal:
     
-    def __init__(self,tete : BodyPart,pattes : BodyPart, torse : BodyPart, x, y):
+    def __init__(self,tete : BodyPart, pattes : BodyPart, torse : BodyPart, x, y):
         self.list_body_parts = {"tete" : tete, "pattes" : pattes, "torse" : torse}
         self.pos_x = x
         self.pos_y = y
@@ -35,3 +35,10 @@ class Animal:
         x = random.randint(0,Model.SCREEN_LENGTH)
         y = random.randint(0,Model.SCREEN_WIDTH)
         self.set_pos(x,y)
+
+
+    def get_dna(self):
+        dna = ""
+        for body_part in self.list_body_parts:
+            dna += self.list_body_parts[body_part].get_dnasec
+        return dna
