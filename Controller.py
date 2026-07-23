@@ -24,10 +24,10 @@ class Controller:
         if self.inputHandler.resized is not None:
             self.view.resize(self.inputHandler.resized)
         
-        for event in InputHandler.events.keys():
-            if InputHandler.events[event] == InputHandler.keys["mouse_left"]: # si on a cliqué gauche
-                if InputHandler.events[event].released: # si on a *cliqué* gauche
-                    self.search_animal(InputHandler.mouse_pos)
+        for event in self.inputHandler.events.keys():
+            if self.inputHandler.events[event] == self.inputHandler.keys["mouse_left"]: # si on a cliqué gauche
+                if self.inputHandler.events[event].released: # si on a *cliqué* gauche
+                    self.search_animal(self.inputHandler.mouse_pos)
 
 
         for animal in self.model.animals:
