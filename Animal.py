@@ -156,30 +156,6 @@ class Animal:
         
         self.set_pos(self.pos_x+ x_speed, self.pos_y+ y_speed)
 
-    def create_kid(self, part, seq1, seq2, im1, im2):
-        #think to add the kids at tree 
-        p = random.randint(4)
-        """if p == 0 : part = "head"
-        if p == 1 : part = "torso"
-        if p == 2 : part = "legs"
-        if p == 3 : part = "tail" """
-        ind = random.randint(self.list_body_parts[part]//8)
-        kid1, kid2 = self.copy(), self.copy()
-        dna1 = kid1.list_body_parts[part].getdna()
-        dna2 = kid2.list_body_parts[part].getdna()
-        for i in range(0, self.list_body_parts[part], 8):
-            if i == ind:
-                for j in range(8):
-                    dna1[i+j] = seq1[j]
-                    dna2[i+j] = seq2[j]
-            if i<ind:
-                for j in range(8):
-                    dna1[i+j] = self.list_body_parts[part][j]
-                    dna2[i+j] = self.list_body_parts[part][j]
-        kid1.list_body_parts[part].setdna(dna1)
-        kid2.list_body_parts[part].setdna(dna2)
-        return kid1, kid2
-
     def get_dna(self):
         dna = ""
         for body_part in self.list_body_parts:
