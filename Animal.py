@@ -5,10 +5,11 @@ from View import View
 
 class Animal:
     
-    def __init__(self,tete : BodyPart,pattes : BodyPart, torse : BodyPart, x, y):
-        self.list_body_parts = {"tete" : tete, "pattes" : pattes, "torse" : torse}
+    def __init__(self,tete : BodyPart,pattes : BodyPart, torse : BodyPart, queue : BodyPart, x, y):
+        self.list_body_parts = {"tete" : tete, "pattes" : pattes, "torse" : torse, "queue" : queue}
         self.pos_x = x
         self.pos_y = y
+        self.dir = "gauche"
     
     def set_body_part(self, part : str, new_part : BodyPart):
         self.list_body_parts.get(part) = new_part
@@ -16,20 +17,79 @@ class Animal:
     def set_pos(self,x,y):
         """set body parts positions"""
 
+
+
         self.pos_x = x
         self.pos_y = y
 
-        # head (oups)
-        self.list_body_parts.get("tete").set_x(self.pos_x + 2)
-        self.list_body_parts.get("tete").set_y(self.pos_y - 2)
+        if(self.dir ==  "gauche"):
+            # head (oups)
+            self.list_body_parts.get("tete").set_x(self.pos_x + 2)
+            self.list_body_parts.get("tete").set_y(self.pos_y - 2)
 
-        # pattes
-        self.list_body_parts.get("pattes").set_x(self.pos_x -1)
-        self.list_body_parts.get("pattes").set_y(self.pos_y + 2)
+            # pattes
+            self.list_body_parts.get("pattes").set_x(self.pos_x)
+            self.list_body_parts.get("pattes").set_y(self.pos_y + 2)
 
-        # torse
-        self.list_body_parts.get("torse").set_x(self.pos_x)
-        self.list_body_parts.get("torse").set_y(self.pos_y)
+            # queue
+            self.list_body_parts.get("queue").set_x(self.pos_x +2)
+            self.list_body_parts.get("queue").set_y(self.pos_y)
+
+            # torse
+            self.list_body_parts.get("torse").set_x(self.pos_x)
+            self.list_body_parts.get("torse").set_y(self.pos_y)
+
+        elif(self.dir == "droite"):
+            # head (oups)
+            self.list_body_parts.get("tete").set_x(self.pos_x - 2)
+            self.list_body_parts.get("tete").set_y(self.pos_y + 2)
+
+            # pattes
+            self.list_body_parts.get("pattes").set_x(self.pos_x)
+            self.list_body_parts.get("pattes").set_y(self.pos_y + 2)
+
+            # queue
+            self.list_body_parts.get("queue").set_x(self.pos_x-2)
+            self.list_body_parts.get("queue").set_y(self.pos_y)
+
+            # torse
+            self.list_body_parts.get("torse").set_x(self.pos_x)
+            self.list_body_parts.get("torse").set_y(self.pos_y)
+
+        elif(self.dir == "haut"):
+            # head (oups)
+            self.list_body_parts.get("tete").set_x(self.pos_x )
+            self.list_body_parts.get("tete").set_y(self.pos_y - 2)
+
+            # pattes --> rotate ? en dessous ?
+            self.list_body_parts.get("pattes").set_x(self.pos_x)
+            self.list_body_parts.get("pattes").set_y(self.pos_y)
+
+            # queue
+            self.list_body_parts.get("queue").set_x(self.pos_x-2)
+            self.list_body_parts.get("queue").set_y(self.pos_y)
+
+            # torse
+            self.list_body_parts.get("torse").set_x(self.pos_x)
+            self.list_body_parts.get("torse").set_y(self.pos_y)
+
+        elif(self.dir == "bas"):
+            # head (oups)
+            self.list_body_parts.get("tete").set_x(self.pos_x - 2)
+            self.list_body_parts.get("tete").set_y(self.pos_y + 2)
+
+            # pattes
+            self.list_body_parts.get("pattes").set_x(self.pos_x)
+            self.list_body_parts.get("pattes").set_y(self.pos_y + 2)
+
+            # queue
+            self.list_body_parts.get("queue").set_x(self.pos_x-2)
+            self.list_body_parts.get("queue").set_y(self.pos_y)
+
+            # torse
+            self.list_body_parts.get("torse").set_x(self.pos_x)
+            self.list_body_parts.get("torse").set_y(self.pos_y)
+    
     
     def move(self):
         x = random.randint(0,Model.SCREEN_LENGTH)
