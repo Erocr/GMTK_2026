@@ -98,7 +98,7 @@ class View:
 
             for key in animal.list_body_parts:
                 self.draw_image(pg.transform.rotate(animal.list_body_parts[key],angle))
-                
+
 
     def draw_text(self, pos, text, color=(0, 0, 0)):
         pos *= self.screen_ratio
@@ -113,7 +113,10 @@ class View:
     def draw(self):
         self.draw_image("test", Vec(1900, 1260))
 
-        self.draw_ADN(Vec(0, 100), 1000, "RRGGGBBBRGGRRGGBR")
+        # self.draw_ADN(Vec(0, 100), 1000, "RRGGGBBBRGGRRGGBR")
+        
+        for animal in self.model.animals:
+            self.draw_animal(animal)
 
         self.flip()
 
