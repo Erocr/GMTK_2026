@@ -2,7 +2,7 @@ class BodyPart:
 
     def __init__(self, img:str):
         self.img = img 
-        self.adn_sec = ""
+        self.dna_sec = ""
         self.pos_x = 0
         self.pos_y = 0
 
@@ -11,3 +11,9 @@ class BodyPart:
 
     def set_y(self, y):
         self.pos_y = y
+
+    def getdna(self):
+        return self.dna_sec
+
+    def setdna(self, newdna):
+        self.dna_sec = newdna
