@@ -36,71 +36,71 @@ class Animal:
 
         if(self.dir ==  "down"):
             # head (oups)
-            self.list_body_parts.get("head").set_x(self.pos_x + 2)
-            self.list_body_parts.get("head").set_y(self.pos_y - 2)
+            self.list_body_parts["head"].set_x(self.pos_x + 2)
+            self.list_body_parts["head"].set_y(self.pos_y - 2)
 
-            # pattes
-            self.list_body_parts.get("legs").set_x(self.pos_x)
-            self.list_body_parts.get("legs").set_y(self.pos_y + 2)
+            # legs
+            self.list_body_parts["legs"].set_x(self.pos_x)
+            self.list_body_parts["legs"].set_y(self.pos_y + 2)
 
-            # queue
-            self.list_body_parts.get("tail").set_x(self.pos_x +2)
-            self.list_body_parts.get("tail").set_y(self.pos_y)
+            # tail
+            self.list_body_parts["tail"].set_x(self.pos_x +2)
+            self.list_body_parts["tail"].set_y(self.pos_y)
 
             # torso
-            self.list_body_parts.get("torso").set_x(self.pos_x)
-            self.list_body_parts.get("torso").set_y(self.pos_y)
+            self.list_body_parts["torso"].set_x(self.pos_x)
+            self.list_body_parts["torso"].set_y(self.pos_y)
 
         elif(self.dir == "right"):
             # head (oups)
-            self.list_body_parts.get("head").set_x(self.pos_x - 2)
-            self.list_body_parts.get("head").set_y(self.pos_y + 2)
+            self.list_body_parts["head"].set_x(self.pos_x - 2)
+            self.list_body_parts["head"].set_y(self.pos_y + 2)
 
-            # pattes
-            self.list_body_parts.get("pattes").set_x(self.pos_x)
-            self.list_body_parts.get("pattes").set_y(self.pos_y + 2)
+            # legs
+            self.list_body_parts["legs"].set_x(self.pos_x)
+            self.list_body_parts["legs"].set_y(self.pos_y + 2)
 
-            # queue
-            self.list_body_parts.get("queue").set_x(self.pos_x-2)
-            self.list_body_parts.get("queue").set_y(self.pos_y)
+            # tail
+            self.list_body_parts["tail"].set_x(self.pos_x-2)
+            self.list_body_parts["tail"].set_y(self.pos_y)
 
             # torso
-            self.list_body_parts.get("torso").set_x(self.pos_x)
-            self.list_body_parts.get("torso").set_y(self.pos_y)
+            self.list_body_parts["torso"].set_x(self.pos_x)
+            self.list_body_parts["torso"].set_y(self.pos_y)
 
         elif(self.dir == "up"):
             # head (oups)
-            self.list_body_parts.get("head").set_x(self.pos_x )
-            self.list_body_parts.get("head").set_y(self.pos_y - 2)
+            self.list_body_parts["head"].set_x(self.pos_x )
+            self.list_body_parts["head"].set_y(self.pos_y - 2)
 
-            # pattes --> rotate ? en dessous ?
-            self.list_body_parts.get("pattes").set_x(self.pos_x)
-            self.list_body_parts.get("pattes").set_y(self.pos_y)
+            # legs --> rotate ? en dessous ?
+            self.list_body_parts["legs"].set_x(self.pos_x)
+            self.list_body_parts["legs"].set_y(self.pos_y)
 
-            # queue
-            self.list_body_parts.get("queue").set_x(self.pos_x-2)
-            self.list_body_parts.get("queue").set_y(self.pos_y)
+            # tail
+            self.list_body_parts["tail"].set_x(self.pos_x-2)
+            self.list_body_parts["tail"].set_y(self.pos_y)
 
             # torso
-            self.list_body_parts.get("torso").set_x(self.pos_x)
-            self.list_body_parts.get("torso").set_y(self.pos_y)
+            self.list_body_parts["torso"].set_x(self.pos_x)
+            self.list_body_parts["torso"].set_y(self.pos_y)
 
         elif(self.dir == "down"):
             # head (oups)
-            self.list_body_parts.get("head").set_x(self.pos_x - 2)
-            self.list_body_parts.get("head").set_y(self.pos_y + 2)
+            self.list_body_parts["head"].set_x(self.pos_x - 2)
+            self.list_body_parts["head"].set_y(self.pos_y + 2)
 
-            # pattes
-            self.list_body_parts.get("pattes").set_x(self.pos_x)
-            self.list_body_parts.get("pattes").set_y(self.pos_y + 2)
+            # legs
+            self.list_body_parts["legs"].set_x(self.pos_x)
+            self.list_body_parts["legs"].set_y(self.pos_y + 2)
 
-            # queue
-            self.list_body_parts.get("queue").set_x(self.pos_x-2)
-            self.list_body_parts.get("queue").set_y(self.pos_y)
+            # tail
+            self.list_body_parts["tail"].set_x(self.pos_x-2)
+            self.list_body_parts["tail"].set_y(self.pos_y)
 
             # torso
-            self.list_body_parts.get("torso").set_x(self.pos_x)
-            self.list_body_parts.get("torso").set_y(self.pos_y)
+            self.list_body_parts["torso"].set_x(self.pos_x)
+            self.list_body_parts["torso"].set_y(self.pos_y)
     
     
     def move(self):
