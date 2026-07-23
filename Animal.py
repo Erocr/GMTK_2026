@@ -4,15 +4,22 @@ from Model import Model
 from View import View
 
 class Animal:
+
+    last_id = 0
     
     def __init__(self, head : BodyPart,legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y):
+        self.id = self.last_id + 1
+        Animal.last_id += 1
         self.list_body_parts = {"head" : head, "legs" : legs, "torso" : torso, "tail" : tail}
         self.pos_x = x
         self.pos_y = y
         self.dir = "left"
+
+    def __hash__(self):
+        hash(self.id)
     
     def set_body_part(self, part : str, new_part : BodyPart):
-        self.list_body_parts.get(part) = new_part
+        self.list_body_parts[part] = new_part
 
     def set_pos(self,x,y):
         """set body parts positions"""
@@ -87,6 +94,8 @@ class Animal:
 
         elif(self.dir == "down"):
             # head (oups)
+            self.list_body_parts["head"].set_x(self.pos_x - 2)
+            self.list_body_parts["head"].set_y(self.pos_y + 2)
             self.list_body_parts["head"].set_x(self.pos_x - 2)
             self.list_body_parts["head"].set_y(self.pos_y + 2)
 
