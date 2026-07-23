@@ -56,26 +56,26 @@ class View:
 
     def draw_ADN(self, pos: Vec, length: float, adn):
         """ adn is a string : R for red, G for green, B for blue"""
-        bar_positions_x = [10, 27, 85, 104, 123, 141, 201, 218]  # Relatively to the image
-        bar_positions_y = [11, 15, 19, 11, 11, 17, 15, 11]  # Relatively to the image
+        bar_positions_y = [10, 27, 85, 104, 123, 141, 201, 218]  # Relatively to the image
+        bar_positions_x = [11, 15, 19, 11, 11, 17, 15, 11]  # Relatively to the image
 
         colors = {"R": (255, 0, 0),
                   "G": (0, 255, 0),
                   "B": (0, 0, 255)}
 
         index = 0
-        x = 0
-        while x < length:
+        y = 0
+        while y < length:
             for i in range(8):
                 if index + i >= len(adn):
                     return
-                bar_x = bar_positions_x[i]
                 bar_y = bar_positions_y[i]
-                bar_size = Vec(5, 80-bar_y*2)
+                bar_x = bar_positions_x[i]
+                bar_size = Vec(80-bar_x*2, 5)
                 self.rect(pos + Vec(bar_x, bar_y), bar_size, colors[adn[index+i]])
             self.draw_image("ADN_no_bars", pos)
-            pos += Vec(self.images_full["ADN_no_bars"].get_width(), 0)
-            x += self.images_full["ADN_no_bars"].get_width()
+            pos += Vec(0, self.images_full["ADN_no_bars"].get_height())
+            y += self.images_full["ADN_no_bars"].get_height()
             index += 8
 
     def draw_image(self, image_name, pos):
@@ -113,7 +113,7 @@ class View:
     def draw(self):
         self.draw_image("test", Vec(1900, 1260))
 
-        # self.draw_ADN(Vec(0, 100), 1000, "RRGGGBBBRGGRRGGBR")
+        self.draw_ADN(Vec(0, 100), 1000, "RRGGGBBBRGGRRGGBR")
         
         for animal in self.model.animals:
             self.draw_animal(animal)
