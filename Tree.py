@@ -2,12 +2,12 @@ from Animal import Animal
 
 class Tree :
 
-    def __init__(self, commun_ancestor: Animal):
+    def __init__(self, common_ancestor: Animal):
         """
         The commun ancestor has a value of None in the dict of the direct ancestors
         """
-        commun_ancestor = commun_ancestor
-        direct_ancestors = {commun_ancestor: None}
+        common_ancestor = common_ancestor
+        direct_ancestors = {common_ancestor: None}
 
     def add_animal(self, animal: Animal, ancestor: Animal):
         self.direct_ancestors[animal: ancestor]
