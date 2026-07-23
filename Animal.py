@@ -5,11 +5,11 @@ from View import View
 
 class Animal:
     
-    def __init__(self,tete : BodyPart,pattes : BodyPart, torse : BodyPart, queue : BodyPart, x, y):
-        self.list_body_parts = {"tete" : tete, "pattes" : pattes, "torse" : torse, "queue" : queue}
+    def __init__(self, head : BodyPart,legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y):
+        self.list_body_parts = {"head" : head, "legs" : legs, "torso" : torso, "tail" : tail}
         self.pos_x = x
         self.pos_y = y
-        self.dir = "gauche"
+        self.dir = "left"
     
     def set_body_part(self, part : str, new_part : BodyPart):
         self.list_body_parts.get(part) = new_part
@@ -22,39 +22,39 @@ class Animal:
 
         if(abs(diff_x) > abs(diff_y)):
             if(diff_x>0):
-                self.dir = "gauche"
+                self.dir = "left"
             else:
-                self.dir = "droite"
+                self.dir = "right"
         else:
             if(diff_y>0):
-                self.dir = "haut"
+                self.dir = "up"
             else:
-                self.dir = "bas"
+                self.dir = "down"
         
         self.pos_x = x
         self.pos_y = y
 
-        if(self.dir ==  "gauche"):
+        if(self.dir ==  "down"):
             # head (oups)
-            self.list_body_parts.get("tete").set_x(self.pos_x + 2)
-            self.list_body_parts.get("tete").set_y(self.pos_y - 2)
+            self.list_body_parts.get("head").set_x(self.pos_x + 2)
+            self.list_body_parts.get("head").set_y(self.pos_y - 2)
 
             # pattes
-            self.list_body_parts.get("pattes").set_x(self.pos_x)
-            self.list_body_parts.get("pattes").set_y(self.pos_y + 2)
+            self.list_body_parts.get("legs").set_x(self.pos_x)
+            self.list_body_parts.get("legs").set_y(self.pos_y + 2)
 
             # queue
-            self.list_body_parts.get("queue").set_x(self.pos_x +2)
-            self.list_body_parts.get("queue").set_y(self.pos_y)
+            self.list_body_parts.get("tail").set_x(self.pos_x +2)
+            self.list_body_parts.get("tail").set_y(self.pos_y)
 
-            # torse
-            self.list_body_parts.get("torse").set_x(self.pos_x)
-            self.list_body_parts.get("torse").set_y(self.pos_y)
+            # torso
+            self.list_body_parts.get("torso").set_x(self.pos_x)
+            self.list_body_parts.get("torso").set_y(self.pos_y)
 
-        elif(self.dir == "droite"):
+        elif(self.dir == "right"):
             # head (oups)
-            self.list_body_parts.get("tete").set_x(self.pos_x - 2)
-            self.list_body_parts.get("tete").set_y(self.pos_y + 2)
+            self.list_body_parts.get("head").set_x(self.pos_x - 2)
+            self.list_body_parts.get("head").set_y(self.pos_y + 2)
 
             # pattes
             self.list_body_parts.get("pattes").set_x(self.pos_x)
@@ -64,14 +64,14 @@ class Animal:
             self.list_body_parts.get("queue").set_x(self.pos_x-2)
             self.list_body_parts.get("queue").set_y(self.pos_y)
 
-            # torse
-            self.list_body_parts.get("torse").set_x(self.pos_x)
-            self.list_body_parts.get("torse").set_y(self.pos_y)
+            # torso
+            self.list_body_parts.get("torso").set_x(self.pos_x)
+            self.list_body_parts.get("torso").set_y(self.pos_y)
 
-        elif(self.dir == "haut"):
+        elif(self.dir == "up"):
             # head (oups)
-            self.list_body_parts.get("tete").set_x(self.pos_x )
-            self.list_body_parts.get("tete").set_y(self.pos_y - 2)
+            self.list_body_parts.get("head").set_x(self.pos_x )
+            self.list_body_parts.get("head").set_y(self.pos_y - 2)
 
             # pattes --> rotate ? en dessous ?
             self.list_body_parts.get("pattes").set_x(self.pos_x)
@@ -81,14 +81,14 @@ class Animal:
             self.list_body_parts.get("queue").set_x(self.pos_x-2)
             self.list_body_parts.get("queue").set_y(self.pos_y)
 
-            # torse
-            self.list_body_parts.get("torse").set_x(self.pos_x)
-            self.list_body_parts.get("torse").set_y(self.pos_y)
+            # torso
+            self.list_body_parts.get("torso").set_x(self.pos_x)
+            self.list_body_parts.get("torso").set_y(self.pos_y)
 
-        elif(self.dir == "bas"):
+        elif(self.dir == "down"):
             # head (oups)
-            self.list_body_parts.get("tete").set_x(self.pos_x - 2)
-            self.list_body_parts.get("tete").set_y(self.pos_y + 2)
+            self.list_body_parts.get("head").set_x(self.pos_x - 2)
+            self.list_body_parts.get("head").set_y(self.pos_y + 2)
 
             # pattes
             self.list_body_parts.get("pattes").set_x(self.pos_x)
@@ -98,9 +98,9 @@ class Animal:
             self.list_body_parts.get("queue").set_x(self.pos_x-2)
             self.list_body_parts.get("queue").set_y(self.pos_y)
 
-            # torse
-            self.list_body_parts.get("torse").set_x(self.pos_x)
-            self.list_body_parts.get("torse").set_y(self.pos_y)
+            # torso
+            self.list_body_parts.get("torso").set_x(self.pos_x)
+            self.list_body_parts.get("torso").set_y(self.pos_y)
     
     
     def move(self):
