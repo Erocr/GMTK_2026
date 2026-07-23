@@ -93,7 +93,7 @@ class View:
         else:
             if(animal.dir == "haut"):
                 angle = -90
-            else:
+            elif(animal.dir == "bas"):
                 angle = 90
 
             for key in animal.list_body_parts:
