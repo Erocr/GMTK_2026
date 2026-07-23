@@ -1,7 +1,6 @@
 class BodyPart:
 
-    def __init__(self, img:str):
-        self.img = img 
+    def __init__(self, dna_sec : str):
         self.dna_sec = ""
         self.pos_x = 0
         self.pos_y = 0
