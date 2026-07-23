@@ -8,7 +8,7 @@ class Animal:
 
     last_id = 0
     
-    def __init__(self, head : BodyPart,legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y):
+    def __init__(self, head : BodyPart, legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y):
         self.id = self.last_id + 1
         Animal.last_id += 1
         self.list_body_parts = {"head" : head, "legs" : legs, "torso" : torso, "tail" : tail}
@@ -19,6 +19,11 @@ class Animal:
 
     def __hash__(self):
         hash(self.id)
+
+    def __eq__(self, animal2):
+        for bodypart in self.list_body_parts:
+            if self.list_body_parts[bodypart] != animal2.list_body_parts[bodypart]: return False
+        return True
     
     def set_body_part(self, part : str, new_part : BodyPart):
         self.list_body_parts[part] = new_part
