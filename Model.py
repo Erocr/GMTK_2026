@@ -5,6 +5,8 @@ class Model:
         self.SCREEN_LENGTH = 1280
         self.SCREEN_WIDTH = 1920
         self.animals = []
+        self.dna_image = {}
+        self.images = []
 
     def update(self):
         pass
@@ -12,14 +14,12 @@ class Model:
     def add_animal(self, animal):
         self.animals.append(animal)
 
-    def dna_edit():
+    def dna_edit(self):
         col = ['R', 'B', 'V']
         sequences = combinations(col, 8)
-        dna_image = {}
-        nbimg = 2 #A UPADATE
-        images = []
+        nbimg = 2 #A UPDATE
         for i in range(nbimg):
-            images.append("tail"+ str(i)+".png")
-            images.append("torso"+ str(i)+".png")
+            self.images.append("tail"+ str(i)+".png")
+            self.images.append("torso"+ str(i)+".png")
         for elt in sequences:
-            dna_image[elt] = images[randint(len(images))]
+            self.dna_image[elt] = self.images[randint(len(self.images))]
