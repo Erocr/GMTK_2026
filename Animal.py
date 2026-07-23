@@ -17,8 +17,20 @@ class Animal:
     def set_pos(self,x,y):
         """set body parts positions"""
 
+        diff_x = self.pos_x - x
+        diff_y = self.pos_y - y
 
-
+        if(abs(diff_x) > abs(diff_y)):
+            if(diff_x>0):
+                self.dir = "gauche"
+            else:
+                self.dir = "droite"
+        else:
+            if(diff_y>0):
+                self.dir = "haut"
+            else:
+                self.dir = "bas"
+        
         self.pos_x = x
         self.pos_y = y
 
