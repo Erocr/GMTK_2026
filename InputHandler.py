@@ -87,7 +87,7 @@ class InputHandler:
             elif evt.type == pg.VIDEORESIZE:  # The user resizes the window
                 self.resized = Vec(evt.w, evt.h)
 
-    def key_id(self, key: int | str):
+    def key_id(self, key):
         """
         This function generalizes the pygame keys as strings or numbers.
         Moreover, it gives a better error if it doesn't exist.
@@ -103,7 +103,7 @@ class InputHandler:
         else:
             raise Exception(f"key {key} does not exist")
 
-    def get_duration(self, key: int | str):
+    def get_duration(self, key):
         """ Returns the number of frames since the user started to press the key.
         It returns -1 if this key is not pressed
         """
@@ -113,20 +113,20 @@ class InputHandler:
         else:
             return -1
 
-    def resize(self) -> Vec | None:
+    def resize(self) -> Vec:
         return self.resized
 
-    def pressed(self, key: int | str):
+    def pressed(self, key):
         """ Returns True only during the frame in which the user presse the key. """
         key = self.key_id(key)
         return key in self.events and self.events[key].pressed
 
-    def holding(self, key: int | str):
+    def holding(self, key):
         """ Returns True while the user is pressing the key. """
         key = self.key_id(key)
         return key in self.events and self.events[key].holding
 
-    def released(self, key: int | str):
+    def released(self, key):
         """ Returns True only during the frame in which the user releases the key. """
         key = self.key_id(key)
         return key in self.events and self.events[key].released
