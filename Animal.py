@@ -2,7 +2,6 @@ import random
 import time
 from BodyPart import BodyPart
 from Model import Model
-from View import View
 
 class Animal:
     
@@ -35,77 +34,80 @@ class Animal:
                 self.dir = "up"
             else:
                 self.dir = "down"
-        
-        self.pos_x = x
-        self.pos_y = y
 
-        if(self.dir ==  "left"):
-            # head (oups)
-            self.list_body_parts["head"].set_x(self.pos_x + 2)
-            self.list_body_parts["head"].set_y(self.pos_y - 2)
 
-            # legs
-            self.list_body_parts["legs"].set_x(self.pos_x)
-            self.list_body_parts["legs"].set_y(self.pos_y + 2)
 
-            # tail
-            self.list_body_parts["tail"].set_x(self.pos_x +2)
-            self.list_body_parts["tail"].set_y(self.pos_y)
+        """décalage des membres inutile normalement"""
+        # self.pos_x = x
+        # self.pos_y = y
 
-            # torso
-            self.list_body_parts["torso"].set_x(self.pos_x)
-            self.list_body_parts["torso"].set_y(self.pos_y)
+        # if(self.dir ==  "left"):
+        #     # head (oups)
+        #     self.list_body_parts["head"].set_x(self.pos_x + 2)
+        #     self.list_body_parts["head"].set_y(self.pos_y - 2)
 
-        elif(self.dir == "right"):
-            # head (oups)
-            self.list_body_parts["head"].set_x(self.pos_x - 2)
-            self.list_body_parts["head"].set_y(self.pos_y + 2)
+        #     # legs
+        #     self.list_body_parts["legs"].set_x(self.pos_x)
+        #     self.list_body_parts["legs"].set_y(self.pos_y + 2)
 
-            # legs
-            self.list_body_parts["legs"].set_x(self.pos_x)
-            self.list_body_parts["legs"].set_y(self.pos_y + 2)
+        #     # tail
+        #     self.list_body_parts["tail"].set_x(self.pos_x +2)
+        #     self.list_body_parts["tail"].set_y(self.pos_y)
 
-            # tail
-            self.list_body_parts["tail"].set_x(self.pos_x-2)
-            self.list_body_parts["tail"].set_y(self.pos_y)
+        #     # torso
+        #     self.list_body_parts["torso"].set_x(self.pos_x)
+        #     self.list_body_parts["torso"].set_y(self.pos_y)
 
-            # torso
-            self.list_body_parts["torso"].set_x(self.pos_x)
-            self.list_body_parts["torso"].set_y(self.pos_y)
+        # elif(self.dir == "right"):
+        #     # head (oups)
+        #     self.list_body_parts["head"].set_x(self.pos_x - 2)
+        #     self.list_body_parts["head"].set_y(self.pos_y + 2)
 
-        elif(self.dir == "up"):
-            # head (oups)
-            self.list_body_parts["head"].set_x(self.pos_x )
-            self.list_body_parts["head"].set_y(self.pos_y - 2)
+        #     # legs
+        #     self.list_body_parts["legs"].set_x(self.pos_x)
+        #     self.list_body_parts["legs"].set_y(self.pos_y + 2)
 
-            # legs --> rotate ? en dessous ?
-            self.list_body_parts["legs"].set_x(self.pos_x)
-            self.list_body_parts["legs"].set_y(self.pos_y)
+        #     # tail
+        #     self.list_body_parts["tail"].set_x(self.pos_x-2)
+        #     self.list_body_parts["tail"].set_y(self.pos_y)
 
-            # tail
-            self.list_body_parts["tail"].set_x(self.pos_x-2)
-            self.list_body_parts["tail"].set_y(self.pos_y)
+        #     # torso
+        #     self.list_body_parts["torso"].set_x(self.pos_x)
+        #     self.list_body_parts["torso"].set_y(self.pos_y)
 
-            # torso
-            self.list_body_parts["torso"].set_x(self.pos_x)
-            self.list_body_parts["torso"].set_y(self.pos_y)
+        # elif(self.dir == "up"):
+        #     # head (oups)
+        #     self.list_body_parts["head"].set_x(self.pos_x )
+        #     self.list_body_parts["head"].set_y(self.pos_y - 2)
 
-        elif(self.dir == "down"):
-            # head (oups)
-            self.list_body_parts["head"].set_x(self.pos_x - 2)
-            self.list_body_parts["head"].set_y(self.pos_y + 2)
+        #     # legs --> rotate ? en dessous ?
+        #     self.list_body_parts["legs"].set_x(self.pos_x)
+        #     self.list_body_parts["legs"].set_y(self.pos_y)
 
-            # legs
-            self.list_body_parts["legs"].set_x(self.pos_x)
-            self.list_body_parts["legs"].set_y(self.pos_y + 2)
+        #     # tail
+        #     self.list_body_parts["tail"].set_x(self.pos_x-2)
+        #     self.list_body_parts["tail"].set_y(self.pos_y)
 
-            # tail
-            self.list_body_parts["tail"].set_x(self.pos_x-2)
-            self.list_body_parts["tail"].set_y(self.pos_y)
+        #     # torso
+        #     self.list_body_parts["torso"].set_x(self.pos_x)
+        #     self.list_body_parts["torso"].set_y(self.pos_y)
 
-            # torso
-            self.list_body_parts["torso"].set_x(self.pos_x)
-            self.list_body_parts["torso"].set_y(self.pos_y)
+        # elif(self.dir == "down"):
+        #     # head (oups)
+        #     self.list_body_parts["head"].set_x(self.pos_x - 2)
+        #     self.list_body_parts["head"].set_y(self.pos_y + 2)
+
+        #     # legs
+        #     self.list_body_parts["legs"].set_x(self.pos_x)
+        #     self.list_body_parts["legs"].set_y(self.pos_y + 2)
+
+        #     # tail
+        #     self.list_body_parts["tail"].set_x(self.pos_x-2)
+        #     self.list_body_parts["tail"].set_y(self.pos_y)
+
+        #     # torso
+        #     self.list_body_parts["torso"].set_x(self.pos_x)
+        #     self.list_body_parts["torso"].set_y(self.pos_y)
     
     
     def move(self):

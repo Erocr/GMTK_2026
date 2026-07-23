@@ -1,7 +1,8 @@
 import pygame as pg
+from BodyPart import BodyPart
 from Vec import *
 import os
-
+from Animal import Animal
 
 class View:
     def __init__(self, model):
@@ -79,6 +80,25 @@ class View:
 
     def draw_image(self, image_name, pos):
         self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get())
+    
+    def draw_animal(self, animal:Animal):
+        
+        """ tourner les images selon la direction: de base elle va vers la gauche"""
+        if(animal.dir == "droite"):
+            flip_x = False
+            flip_y = True
+
+            for key in animal.list_body_parts:
+                self.draw_image(pg.transform.flip(animal.list_body_parts[key],flip_x,flip_y))
+        else:
+            if(animal.dir == "haut"):
+                angle = -90
+            else:
+                angle = 90
+
+            for key in animal.list_body_parts:
+                self.draw_image(pg.transform.rotate(animal.list_body_parts[key],angle))
+                
 
     def draw_text(self, pos, text, color=(0, 0, 0)):
         pos *= self.screen_ratio
