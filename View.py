@@ -94,23 +94,23 @@ class View:
     def draw_image_rotated(self, image_name : str, pos, angle):
         self.screen.blit( pg.transform.rotate( self.images[image_name] , angle) , (pos*self.screen_ratio).get())
     
-    def draw_animal(self, animal:Animal):
+    def draw_animal(self, animal: Animal):
         
-        """ tourner les images selon la direction: de base elle va vers la gauche"""
-        if(animal.dir == "left"):
+        """ Tourner les images selon la direction: de base elle va vers la gauche"""
+        if animal.dir == "left":
             for key in self.body_parts_ordered:
-                self.draw_image( self.model.get_image(animal.list_body_parts[key].active_sec) , Vec(animal.pos_x,animal.pos_y))
-        elif(animal.dir == "right"):
+                self.draw_image(self.model.get_image(animal.specie.list_body_parts[key].active_sec), animal.pos)
+        elif animal.dir == "right":
             for key in self.body_parts_ordered:
-                self.draw_image_flipped( self.model.get_image(animal.list_body_parts[key].active_sec), Vec(animal.pos_x,animal.pos_y))
+                self.draw_image_flipped(self.model.get_image(animal.specie.list_body_parts[key].active_sec), animal.pos)
         else:
-            if(animal.dir == "up"):
+            if animal.dir == "up":
                 angle = -90
-            elif(animal.dir == "down"):
+            elif animal.dir == "down":
                 angle = 90
 
             for key in self.body_parts_ordered:
-                self.draw_image_rotated( self.model.get_image(animal.list_body_parts[key].active_sec), Vec(animal.pos_x,animal.pos_y), angle)
+                self.draw_image_rotated(self.model.get_image(animal.specie.list_body_parts[key].active_sec), animal.pos, angle)
 
 
     def draw_text(self, pos, text, color=(0, 0, 0)):

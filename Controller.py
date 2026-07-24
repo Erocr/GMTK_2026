@@ -6,7 +6,7 @@ from Tree import Tree
 
 
 class Controller:
-    def __init__(self, model:Model, view):
+    def __init__(self, model: Model, view):
         self.model = model
         self.view = view
         self.inputHandler = InputHandler(view)
@@ -28,8 +28,8 @@ class Controller:
             children.append(kid2)
             waiting_children.append(kid1)
             children.append(kid2)
-            for kid in waiting_children : 
-                self.create_children(tree, kid,etage-1, children)
+            for kid in waiting_children:
+                self.create_children(tree, kid, etage-1, children)
             
 
 
@@ -53,11 +53,11 @@ class Controller:
         for animal in self.model.animals:
             animal.move()
 
-    def get_random_seq(self, part : str, avoid: list[str]=None):
+    def get_random_seq(self, part: str, avoid: list[str]=None):
             """
-            Return None if their is no body part left without choosing one that must be avoid \n
+            Return None if there is no body part left without choosing one that must be avoid \n
             """
-            if not avoid : avoid = []
+            if not avoid: avoid = []
             if len(avoid) > 5: return None
 
             #Take all the dna sequences linked to the body part
@@ -70,7 +70,7 @@ class Controller:
                     if char == '_': break
                     else: p += char
                 #add if it's the good part
-                if p == part : dna.append(elt)
+                if p == part: dna.append(elt)
 
             return dna[randint(0, len(dna)-1)]
 

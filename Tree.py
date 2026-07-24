@@ -1,10 +1,9 @@
 from random import randint
-from Animal import Animal
+from Specie import Specie
 from Model import Model
 
-class Tree :
-
-    def __init__(self, common_ancestor: Animal, model : Model):
+class Tree:
+    def __init__(self, common_ancestor: Specie, model: Model):
         """
         The commun ancestor has a value of None in the dict of the direct ancestors
         """
@@ -12,7 +11,7 @@ class Tree :
         self.direct_ancestors = {common_ancestor: None}
         self.model = model
 
-    def add_animal(self, animal: Animal, ancestor: Animal):
+    def add_animal(self, animal: Specie, ancestor: Specie):
         self.direct_ancestors[animal] = ancestor
 
     def is_ancestor(self, animal1, animal2):
@@ -21,8 +20,7 @@ class Tree :
         """
         return self.direct_ancestor[animal1] == animal2
 
-
-    def create_kid(self, ancestor : Animal):
+    def create_kid(self, ancestor: Specie):
             p = randint(0, 3)
             part = ["head", "torso", "legs", "tail"][p]
             ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
