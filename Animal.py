@@ -53,8 +53,8 @@ class Animal:
 
 
         """décalage des membres inutile normalement"""
-        # self.pos_x = x
-        # self.pos_y = y
+        self.pos_x = x
+        self.pos_y = y
 
         # if(self.dir ==  "left"):
         #     # head (oups)
@@ -129,10 +129,10 @@ class Animal:
         now = time.time()
         if(now - self.start > 60):
             self.start = now
-            x_goal = random.randint(0,Model.SCREEN_LENGTH)
-            y_goal = random.randint(0,Model.SCREEN_WIDTH)
+            x_goal = random.randint(0,self.model.SCREEN_LENGTH)
+            y_goal = random.randint(0,self.model.SCREEN_WIDTH)
         
-        self.go_to(x_goal,y_goal)
+            self.go_to(x_goal,y_goal)
     
     def go_to(self,x,y):
         # ràv avec la fonction set_pos pas touche
@@ -155,13 +155,6 @@ class Animal:
             y_speed = -3
         
         self.set_pos(self.pos_x+ x_speed, self.pos_y+ y_speed)
-
-    def get_dna(self):
-        dna = ""
-        for body_part in self.list_body_parts:
-            dna += self.list_body_parts[body_part].get_dnasec
-        return dna
-
 
     def get_dna(self):
         dna = ""

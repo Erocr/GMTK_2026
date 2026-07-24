@@ -22,6 +22,8 @@ class View:
         # Same of images_full, but this time it has a size depending on the size of the screen
         self.images: dict[str: pg.Surface] = {}
 
+        self.body_parts_ordered = ["tail", "torso", "legs", "head"]
+
         self.load_images()
         self.resize_images()
 
@@ -78,26 +80,32 @@ class View:
             y += self.images_full["ADN_no_bars"].get_height()
             index += 8
 
-    def draw_image(self, image_name, pos):
+    def draw_image(self, image_name : str, pos):
         self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get())
+
+    def draw_image_flipped(self, image_name : str, pos):
+        self.screen.blit( pg.transform.flip( self.images[image_name] , False, True) , (pos*self.screen_ratio).get())
+
+    def draw_image_rotated(self, image_name : str, pos, angle):
+        self.screen.blit( pg.transform.rotate( self.images[image_name] , angle) , (pos*self.screen_ratio).get())
     
     def draw_animal(self, animal:Animal):
         
         """ tourner les images selon la direction: de base elle va vers la gauche"""
-        if(animal.dir == "droite"):
-            flip_x = False
-            flip_y = True
-
-            for key in animal.list_body_parts:
-                self.draw_image(pg.transform.flip(animal.list_body_parts[key],flip_x,flip_y))
+        if(animal.dir == "left"):
+            for key in self.body_parts_ordered:
+                self.draw_image(animal.list_body_parts[key].image_name, Vec(animal.pos_x,animal.pos_y))
+        elif(animal.dir == "right"):
+            for key in self.body_parts_ordered:
+                self.draw_image_flipped(animal.list_body_parts[key].image_name, Vec(animal.pos_x,animal.pos_y))
         else:
-            if(animal.dir == "haut"):
+            if(animal.dir == "up"):
                 angle = -90
-            elif(animal.dir == "bas"):
+            elif(animal.dir == "down"):
                 angle = 90
 
-            for key in animal.list_body_parts:
-                self.draw_image(pg.transform.rotate(animal.list_body_parts[key],angle))
+            for key in self.body_parts_ordered:
+                self.draw_image_rotated(animal.list_body_parts[key].image_name, Vec(animal.pos_x,animal.pos_y), angle)
 
 
     def draw_text(self, pos, text, color=(0, 0, 0)):

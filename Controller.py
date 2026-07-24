@@ -13,9 +13,9 @@ class Controller:
     def quit(self):
         return self.inputHandler.quit
 
-    def search_animal(self,pos:Vec):
+    def search_animal(self,mouse_pos:Vec):
         for animal in self.model.animals:
-            if(animal.pos_x == pos.x and animal.pos_y == pos.y):
+            if(animal.pos_x == mouse_pos.x and animal.pos_y == mouse_pos.y):
                 #TODO prévenir l'animal qu'il est cliqué ? ouvrir la fenêtre de découpage d'adn
                 pass
 
