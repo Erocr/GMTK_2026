@@ -25,7 +25,7 @@ class Tree :
     def create_kid(self, ancestor : Animal):
             p = randint(0, 3)
             part = ["head", "torso", "legs", "tail"][p]
-            ind = randint(0, ancestor.list_body_parts[part]//8)
+            ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec)-1)//8)
             kid1, kid2 = ancestor.copy(), ancestor.copy()
             dna1 = kid1.list_body_parts[part].getdna()
             dna2 = kid2.list_body_parts[part].getdna()
