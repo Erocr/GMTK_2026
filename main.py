@@ -5,7 +5,6 @@ from Vec import Vec
 from View import View
 from Controller import Controller
 from Model import Model
-from Animal import Animal
 from Specie import Specie
 from BodyPart import BodyPart
 
