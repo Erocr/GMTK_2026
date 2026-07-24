@@ -1,5 +1,7 @@
 from random import randint, shuffle
 from Vec import Vec
+from Specie import Specie
+from Tree import Tree
 
 
 class Model:
@@ -8,6 +10,7 @@ class Model:
     def __init__(self):
         self.SCREEN_LENGTH = 1280
         self.SCREEN_WIDTH = 1920
+        self.tree = None
         self.animals = []
         self.dna_image = {}
         self.images = []
@@ -15,6 +18,9 @@ class Model:
 
     def update(self):
         pass
+
+    def set_tree(self, tree: Tree):
+        self.tree = tree
 
     def get_image(self, sequence: str):
         return self.dna_image[sequence]
@@ -76,3 +82,27 @@ class Model:
             if p == part : dna.append(elt)
 
         return dna[randint(0, len(dna)-1)]
+
+
+    def create_kid(self, ancestor: Specie):
+            p = randint(0, 3)
+            part = ["head", "torso", "legs", "tail"][p]
+            ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
+            kid1, kid2 = ancestor.copy(), ancestor.copy()
+            dna1 = kid1.list_body_parts[part].getdna()
+            dna2 = kid2.list_body_parts[part].getdna()
+
+            seq1 = self.get_random_seq(part, [ancestor.list_body_parts[part].active_sec])
+            seq2 = self.get_random_seq(part, [ancestor.list_body_parts[part].active_sec, seq1])
+            if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
+                dna1 += kid1.list_body_parts[part].getdna()+ seq1
+                dna2 += kid2.list_body_parts[part].getdna()+ seq2
+            else:
+                dna1 = ancestor.list_body_parts[part].getdna()[0:ind] + seq1 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
+                dna2 = ancestor.list_body_parts[part].getdna()[0:ind] + seq2 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
+    
+            kid1.list_body_parts[part].setdna(dna1, seq1)
+            kid2.list_body_parts[part].setdna(dna2, seq2)
+            self.add_animal(kid1, ancestor)
+            self.add_animal(kid2, ancestor)
+            return kid1, kid2
