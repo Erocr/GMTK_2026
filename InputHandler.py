@@ -23,11 +23,12 @@ class Key:
 
 
 class InputHandler:
-    def __init__(self):
+    def __init__(self, view):
         """
         This class simplifies the pygame inputs and makes them more accessible via preprocessing them
         You can access inputs via the methods pressed(), holding() and released()
         """
+        self.view = view
         self.keys = {}
         self._pg_events()
         self.events = {}
@@ -64,6 +65,7 @@ class InputHandler:
         Analyze the new events sent by pygame, and write them in a more understandable way
         This method shall be called once per frame
         """
+        self.update_counters()
         self._prev_mouse_pos = self._mouse_pos
         self._mouse_pos = Vec(*pg.mouse.get_pos())
         self._scroll_direction = Vec(0, 0)
@@ -81,7 +83,7 @@ class InputHandler:
             elif evt.type == pg.MOUSEBUTTONDOWN:  # The user presses a mouse button
                 self.events[-evt.button] = Key()  # The mouse buttons are negative
             elif evt.type == pg.MOUSEBUTTONUP:  # The user releases a mouse button
-                self.events.pop(-evt.button)  # The mouse buttons are negative
+                self.events[-evt.button].duration = -1 - (self.events[-evt.button].duration > 0)
             elif evt.type == pg.MOUSEWHEEL:  # The user scrolls with the mouse or a touchpad
                 self._scroll_direction = Vec(evt.x, evt.y)
             elif evt.type == pg.VIDEORESIZE:  # The user resizes the window
@@ -134,13 +136,13 @@ class InputHandler:
     @property
     def mouse_pos(self):
         """ Get the mouse position. """
-        return self._mouse_pos
+        return self._mouse_pos / self.view.screen_ratio
 
     @property
     def mouse_movement(self):
-        return self._mouse_pos - self._prev_mouse_pos
+        return (self._mouse_pos - self._prev_mouse_pos) / self.view.screen_ratio
 
     @property
     def scroll_direction(self):
         """ Get the vector representing how much the user is scrolling """
-        return self._scroll_direction
+        return self._scroll_direction / self.view.screen_ratio

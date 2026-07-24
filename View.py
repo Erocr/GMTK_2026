@@ -3,6 +3,8 @@ from BodyPart import BodyPart
 from Vec import *
 import os
 from Animal import Animal
+from Dna import Dna
+
 
 class View:
     def __init__(self, model):
@@ -24,6 +26,9 @@ class View:
 
         self.load_images()
         self.resize_images()
+
+        self.dna_1 = Dna(Vec(40, 0), 500, "RRVVVBBBBRRRVBVRRVRBRRVB")
+        self.dna_2 = None
 
     def resize(self, screen_size):
         self.screen_size = screen_size
@@ -57,7 +62,7 @@ class View:
     def draw_ADN(self, pos: Vec, length: float, adn):
         """ adn is a string : R for red, G for green, B for blue"""
         bar_positions_y = [10, 27, 85, 104, 123, 141, 201, 218]  # Relatively to the image
-        bar_positions_x = [11, 15, 19, 11, 11, 17, 15, 11]  # Relatively to the image
+        bar_positions_x = [11, 14, 18, 11, 11, 17, 15, 11]  # Relatively to the image
 
         colors = {"R": (255, 0, 0),
                   "G": (0, 255, 0),
@@ -113,7 +118,10 @@ class View:
     def draw(self):
         self.draw_image("test", Vec(1900, 1260))
 
-        self.draw_ADN(Vec(0, 100), 1000, "RRGGGBBBRGGRRGGBR")
+        if self.dna_1 is not None:
+            self.dna_1.draw(self)
+        if self.dna_2 is not None:
+            self.dna_2.draw(self)
         
         for animal in self.model.animals:
             self.draw_animal(animal)
