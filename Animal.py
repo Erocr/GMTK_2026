@@ -4,7 +4,7 @@ from BodyPart import BodyPart
 from Model import Model
 
 class Animal:
-    
+    last_id = 0
 
     def __init__(self, head : BodyPart, legs : BodyPart, torso : BodyPart, tail : BodyPart, x, y, model : Model):
         self.id = self.last_id + 1
@@ -18,7 +18,7 @@ class Animal:
         model.add_animal(self)
 
     def __hash__(self):
-        hash(self.id)
+        return  hash(self.id)
 
     def __eq__(self, animal2):
         for bodypart in self.list_body_parts:
@@ -26,7 +26,7 @@ class Animal:
         return True
 
     def copy(self):
-        copy = Animal(self.list_body_parts["head"], self.list_body_parts["legs"], self.list_body_parts["torso"], self.list_body_parts["tail"], self.x, self.y, self.model)
+        copy = Animal(self.list_body_parts["head"], self.list_body_parts["legs"], self.list_body_parts["torso"], self.list_body_parts["tail"], self.pos_x, self.pos_y, self.model)
         return copy
         
     
