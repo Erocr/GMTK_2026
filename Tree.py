@@ -30,7 +30,8 @@ class Tree :
             dna1 = kid1.list_body_parts[part].getdna()
             dna2 = kid2.list_body_parts[part].getdna()
             # TODO : randomize seq1 & seq2
-            seq1, seq2 = "", ""
+            seq1 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec])
+            seq2 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec, seq1])
             if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
                 dna1 += seq1
                 dna2 += seq2
