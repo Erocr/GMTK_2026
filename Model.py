@@ -17,7 +17,6 @@ class Model:
         pass
 
     def get_image(self, sequence: str):
-        return "legs_0"
         return self.dna_image[sequence]
 
     def add_animal(self, animal):
