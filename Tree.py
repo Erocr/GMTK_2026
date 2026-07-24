@@ -42,3 +42,9 @@ class Tree:
         self.add_animal(kid1, ancestor)
         self.add_animal(kid2, ancestor)
         return kid1, kid2
+
+
+    def get_last_gen(self):
+        ancestor = set(self.direct_ancestors.keys)
+        gen = set(self.direct_ancestors.items)
+        return gen - ancestor
