@@ -22,16 +22,18 @@ class Tree :
         return self.direct_ancestor[animal1] == animal2
 
 
-    def create_kid(self, ancestor : Animal, part, seq1, seq2):
+    def create_kid(self, ancestor : Animal):
             p = randint(4)
-            """if p == 0 : part = "head"
+            if p == 0 : part = "head"
             if p == 1 : part = "torso"
             if p == 2 : part = "legs"
-            if p == 3 : part = "tail" """
+            if p == 3 : part = "tail"
             ind = randint(ancestor.list_body_parts[part]//8)
             kid1, kid2 = ancestor.copy(), ancestor.copy()
             dna1 = kid1.list_body_parts[part].getdna()
             dna2 = kid2.list_body_parts[part].getdna()
+            # TODO : randomize seq1 & seq2
+            seq1, seq2 = ""
             for i in range(0, ancestor.list_body_parts[part], 8):
                 if i == ind:
                     for j in range(8):
@@ -45,6 +47,6 @@ class Tree :
             kid2.list_body_parts[part].setdna(dna2)
             self.add_animal(kid1, ancestor)
             self.add_animal(kid2, ancestor)
-            self.model.add_animal(kid1)
-            self.model.add_animal(kid2)
+            """self.model.add_animal(kid1)
+            self.model.add_animal(kid2) """
             return kid1, kid2
