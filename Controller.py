@@ -24,8 +24,10 @@ class Controller:
         else:
             waiting_children = []
             kid1, kid2 = tree.create_kid(ancestor)
-            children.append(kid1,kid2)
-            waiting_children.append(kid1,kid2)
+            children.append(kid1)
+            children.append(kid2)
+            waiting_children.append(kid1)
+            children.append(kid2)
             for kid in waiting_children : 
                 self.create_children(tree, kid,etage-1, children)
             

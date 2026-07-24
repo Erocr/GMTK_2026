@@ -18,3 +18,7 @@ class BodyPart:
     def adddna(self, newdna):
         self.active_sec = newdna
         self.dna_sec += newdna
+
+    def setdna(self, dna, activedna):
+        self.active_sec = activedna
+        self.dna_sec = dna

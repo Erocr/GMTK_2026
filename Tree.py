@@ -13,7 +13,7 @@ class Tree :
         self.model = model
 
     def add_animal(self, animal: Animal, ancestor: Animal):
-        self.direct_ancestors[animal: ancestor]
+        self.direct_ancestors[animal] = ancestor
 
     def is_ancestor(self, animal1, animal2):
         """
@@ -44,8 +44,8 @@ class Tree :
                         dna1[i+j] = ancestor.list_body_parts[part][j]
                         dna2[i+j] = ancestor.list_body_parts[part][j]
 
-            kid1.list_body_parts[part].setdna(dna1)
-            kid2.list_body_parts[part].setdna(dna2)
+            kid1.list_body_parts[part].setdna(dna1, seq1)
+            kid2.list_body_parts[part].setdna(dna2, seq2)
             self.add_animal(kid1, ancestor)
             self.add_animal(kid2, ancestor)
             return kid1, kid2
