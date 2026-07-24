@@ -4,6 +4,7 @@ from Vec import *
 import os
 from Animal import Animal
 from Dna import Dna
+from DnaEditor import DnaEditor
 
 
 class View:
@@ -28,6 +29,9 @@ class View:
 
         self.load_images()
         self.resize_images()
+
+        self.left_dna_editor = None
+        self.right_dna_editor = None
 
         self.dna_1 = Dna(Vec(40, 0), 500, "RRVVVBBBBRRRVBVRRVRBRRVB")
         self.dna_2 = None

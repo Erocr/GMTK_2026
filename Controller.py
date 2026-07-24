@@ -35,9 +35,11 @@ class Controller:
 
     def search_animal(self,mouse_pos:Vec):
         for animal in self.model.animals:
-            if(animal.pos_x == mouse_pos.x and animal.pos_y == mouse_pos.y):
-                #TODO prévenir l'animal qu'il est cliqué ? ouvrir la fenêtre de découpage d'adn
-                pass
+            if(animal.pos_x <= mouse_pos.x and animal.pos_x + 743 >= mouse_pos.x and animal.pos_y <= mouse_pos.y and animal.pos_y + 458 >= mouse_pos.y):
+                if self.view.left_dna_editor is not None:
+                    pass
+                else:
+                    pass
 
     def update(self):
         self.inputHandler.update()
