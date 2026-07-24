@@ -47,4 +47,4 @@ class Tree:
     def get_last_gen(self):
         ancestor = set(self.direct_ancestors.keys)
         gen = set(self.direct_ancestors.items)
-        return gen - ancestor
+        return list(gen - ancestor)
