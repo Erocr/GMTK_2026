@@ -21,6 +21,7 @@ class Model:
 
     def set_tree(self, tree: Tree):
         self.tree = tree
+        self.animals = self.tree.get_last_gen()
 
     def get_image(self, sequence: str):
         return self.dna_image[sequence]
