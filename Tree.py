@@ -25,13 +25,16 @@ class Tree :
     def create_kid(self, ancestor : Animal):
             p = randint(0, 3)
             part = ["head", "torso", "legs", "tail"][p]
-            ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec)-1)//8)
+            ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
             kid1, kid2 = ancestor.copy(), ancestor.copy()
             dna1 = kid1.list_body_parts[part].getdna()
             dna2 = kid2.list_body_parts[part].getdna()
             # TODO : randomize seq1 & seq2
-            seq1, seq2 = ""
-            for i in range(0, ancestor.list_body_parts[part], 8):
+            seq1, seq2 = "", ""
+            if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
+                dna1 += seq1
+                dna2 += seq2
+            for i in range(0, len(ancestor.list_body_parts[part].dna_sec), 8):
                 if i == ind:
                     for j in range(8):
                         dna1[i+j] = seq1[j]

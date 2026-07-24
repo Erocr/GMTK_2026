@@ -26,7 +26,7 @@ class Animal:
         return True
 
     def copy(self):
-        copy = Animal(self.list_body_parts["head"], self.list_body_parts["legs"], self.list_body_parts["torso"], self.list_body_parts["tail"], self.x, self.y, self.model)
+        copy = Animal(self.list_body_parts["head"], self.list_body_parts["legs"], self.list_body_parts["torso"], self.list_body_parts["tail"], self.pos_x, self.pos_y, self.model)
         return copy
         
     
