@@ -161,10 +161,3 @@ class Animal:
         for body_part in self.list_body_parts:
             dna += self.list_body_parts[body_part].get_dnasec
         return dna
-
-
-    def get_dna(self):
-        dna = ""
-        for body_part in self.list_body_parts:
-            dna += self.list_body_parts[body_part].get_dnasec
-        return dna
