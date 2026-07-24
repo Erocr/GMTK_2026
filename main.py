@@ -15,7 +15,6 @@ def play():
     view = View(model)
     controller = Controller(model, view)
 
-    #model.add_animal(Animal( BodyPart("", "head_0"), BodyPart("", "legs_0"), BodyPart("", "body_0"), BodyPart("", "tail_4"), 0, 0, model ))
 
 
     FPS = 60

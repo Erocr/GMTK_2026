@@ -99,10 +99,10 @@ class View:
         """ tourner les images selon la direction: de base elle va vers la gauche"""
         if(animal.dir == "left"):
             for key in self.body_parts_ordered:
-                self.draw_image(animal.list_body_parts[key].image_name, Vec(animal.pos_x,animal.pos_y))
+                self.draw_image( self.model.get_image(animal.list_body_parts[key].active_sec) , Vec(animal.pos_x,animal.pos_y))
         elif(animal.dir == "right"):
             for key in self.body_parts_ordered:
-                self.draw_image_flipped(animal.list_body_parts[key].image_name, Vec(animal.pos_x,animal.pos_y))
+                self.draw_image_flipped( self.model.get_image(animal.list_body_parts[key].active_sec), Vec(animal.pos_x,animal.pos_y))
         else:
             if(animal.dir == "up"):
                 angle = -90
@@ -110,7 +110,7 @@ class View:
                 angle = 90
 
             for key in self.body_parts_ordered:
-                self.draw_image_rotated(animal.list_body_parts[key].image_name, Vec(animal.pos_x,animal.pos_y), angle)
+                self.draw_image_rotated( self.model.get_image(animal.list_body_parts[key].active_sec), Vec(animal.pos_x,animal.pos_y), angle)
 
 
     def draw_text(self, pos, text, color=(0, 0, 0)):
@@ -124,7 +124,7 @@ class View:
         pg.draw.rect(self.screen, color, pg.Rect(*pos.get(), *size.get()))
 
     def draw(self):
-        self.draw_image("test", Vec(1900, 1260))
+        #self.draw_image("test", Vec(1900, 1260))
 
         if self.dna_1 is not None:
             self.dna_1.draw(self)
