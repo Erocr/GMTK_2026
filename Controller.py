@@ -1,6 +1,7 @@
 from InputHandler import InputHandler, Key
 from Model import Model
 from Vec import Vec
+from random import randint
 
 
 class Controller:
@@ -32,3 +33,29 @@ class Controller:
 
         for animal in self.model.animals:
             animal.move()
+
+    def get_random_seq(self, part : str, avoid: list[str]=None):
+            """
+            Return None if their is no body part left without choosing one that must be avoid
+            """
+            if not avoid : avoid = []
+            if len(avoid) > 5: return None
+
+            #Take all the dna sequences linked to the body part
+            dna = []
+            dict = self.model.get_dna_image()
+            for elt in dict:
+                #Récupération de la string
+                p = ""
+                for char in dict[elt]:
+                    if char == '_': break
+                    else: p += char
+                #add if it's the good part
+                if p == part : dna.append(elt)
+
+            return dna[randint(0, len(dna)-1)]
+
+
+""" model = Model()
+test = Controller(model, None)
+print(model.dna_image[test.get_random_seq("head")]) """

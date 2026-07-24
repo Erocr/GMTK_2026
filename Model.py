@@ -15,6 +15,9 @@ class Model:
     def add_animal(self, animal):
         self.animals.append(animal)
 
+    def get_dna_image(self):
+        return self.dna_image
+
     def dna_set_up(self):
         
         nbimg = 5 #A UPDATE
@@ -44,4 +47,3 @@ class Model:
                 ind = randint(0, len(self.images)-1)
             self.dna_image[elt] = self.images[ind]
             nb_dna[ind] += 1
-        print(nb_dna)
