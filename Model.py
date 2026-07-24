@@ -22,10 +22,10 @@ class Model:
         
         nbimg = 5 #A UPDATE
         for i in range(nbimg):
-            self.images.append("tail_"+ str(i)+".png")
-            self.images.append("torso_"+ str(i)+".png")
-            self.images.append("head_"+ str(i)+".png")
-            self.images.append("legs_"+ str(i)+".png")
+            self.images.append("tail_"+ str(i))
+            self.images.append("torso_"+ str(i))
+            self.images.append("head_"+ str(i))
+            self.images.append("legs_"+ str(i))
 
         col = ['R','V','B']*8
         for i in range(200):
