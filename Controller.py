@@ -1,3 +1,4 @@
+from Animal import Animal
 from InputHandler import InputHandler, Key
 from Model import Model
 from Vec import Vec
@@ -19,7 +20,6 @@ class Controller:
         if children is None:
             children = [ancestor]
         if etage == 0:
-            print(children)
             return children
         else:
             waiting_children = []
@@ -50,7 +50,11 @@ class Controller:
             self.search_animal(self.inputHandler.mouse_pos)
             if self.view.dna_1 is not None:
                 index = self.view.dna_1.dna_clicked(self.inputHandler.mouse_pos)
-                print(index)
+                # print(index) ???
 
         for animal in self.model.animals:
             animal.move()
+
+        
+    def add_animal(self, animal:Animal):
+        self.model.add_animal(animal)

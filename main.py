@@ -31,7 +31,7 @@ def play():
 
     # create animals
     specie = Specie(head, torso, legs, tail, model)
-    ancestor = Animal(Vec(0, 0), specie)
+    # ancestor = Animal(Vec(0, 0), specie)
     tree = Tree(specie, model)
     controller.create_children(tree, specie, 20)
 

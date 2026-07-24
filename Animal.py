@@ -11,7 +11,7 @@ class Animal:
         self.pos = pos
         self.specie = specie
         self.start = time.time()
-        specie.model.add_animal(self)
+        specie.controller.add_animal(self)
         self.dir = "right"
 
     def set_pos(self, new_pos):
