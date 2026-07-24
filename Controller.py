@@ -23,7 +23,7 @@ class Controller:
             return children
         else:
             waiting_children = []
-            kid1, kid2 = tree.create_kid(ancestor)
+            kid1, kid2 = self.model.create_kid(ancestor)
             children.append(kid1)
             children.append(kid2)
             waiting_children.append(kid1)
