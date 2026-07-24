@@ -23,7 +23,7 @@ class Tree :
 
 
     def create_kid(self, ancestor : Animal):
-            p = randint(4)
+            p = randint(0,4)
             part = ["head", "body", "legs", "tail"][p]
             ind = randint(ancestor.list_body_parts[part]//8)
             kid1, kid2 = ancestor.copy(), ancestor.copy()
