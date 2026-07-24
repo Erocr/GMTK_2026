@@ -12,6 +12,9 @@ class Model:
     def update(self):
         pass
 
+    def get_image(self, sequence : str):
+        return self.dna_image[sequence]
+
     def add_animal(self, animal):
         self.animals.append(animal)
 
