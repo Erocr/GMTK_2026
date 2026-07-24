@@ -7,7 +7,7 @@ class Controller:
     def __init__(self, model:Model, view):
         self.model = model
         self.view = view
-        self.inputHandler = InputHandler()
+        self.inputHandler = InputHandler(view)
 
     @property
     def quit(self):
@@ -24,11 +24,11 @@ class Controller:
         if self.inputHandler.resized is not None:
             self.view.resize(self.inputHandler.resized)
         
-        for event in self.inputHandler.events.keys():
-            if self.inputHandler.events[event] == self.inputHandler.keys["mouse_left"]: # si on a cliqué gauche
-                if self.inputHandler.events[event].released: # si on a *cliqué* gauche
-                    self.search_animal(self.inputHandler.mouse_pos)
-
+        if self.inputHandler.pressed("mouse_left"):
+            self.search_animal(self.inputHandler.mouse_pos)
+            if self.view.dna_1 is not None:
+                index = self.view.dna_1.dna_clicked(self.inputHandler.mouse_pos)
+                print(index)
 
         for animal in self.model.animals:
             animal.move()
