@@ -37,6 +37,7 @@ class Controller:
     def get_random_seq(self, part : str, avoid: list[str]=None):
             """
             Return None if their is no body part left without choosing one that must be avoid
+            /!\\ To have a torso, part must be "body"
             """
             if not avoid : avoid = []
             if len(avoid) > 5: return None
