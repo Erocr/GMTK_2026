@@ -1,4 +1,4 @@
-from Animal import Animal
+
 from InputHandler import InputHandler, Key
 from Model import Model
 from Vec import Vec
@@ -56,5 +56,5 @@ class Controller:
             animal.move()
 
         
-    def add_animal(self, animal:Animal):
+    def add_animal(self, animal):
         self.model.add_animal(animal)

@@ -1,7 +1,5 @@
 import random
 import time
-from BodyPart import BodyPart
-from Model import Model
 from Vec import Vec
 from Specie import Specie
 

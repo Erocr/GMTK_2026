@@ -30,7 +30,7 @@ def play():
     tail = BodyPart(model.get_random_seq("tail"))
 
     # create animals
-    specie = Specie(head, torso, legs, tail, model)
+    specie = Specie(head, torso, legs, tail)
     # ancestor = Animal(Vec(0, 0), specie)
     tree = Tree(specie, model)
     controller.create_children(tree, specie, 20)
