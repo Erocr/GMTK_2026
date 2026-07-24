@@ -36,15 +36,6 @@ class Tree:
         else:
             dna1 = ancestor.list_body_parts[part].getdna()[0:ind] + seq1 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
             dna2 = ancestor.list_body_parts[part].getdna()[0:ind] + seq2 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
-        """for i in range(0, len(ancestor.list_body_parts[part].dna_sec), 8):
-            if i == ind:
-                for j in range(8):
-                    dna1 += seq1[j]
-                    dna2 += seq2[j]
-            if i<ind:
-                for j in range(8):
-                    dna1[i+j] = ancestor.list_body_parts[part].dna_sec[j]
-                    dna2[i+j] = ancestor.list_body_parts[part].dna_sec[j] """
 
         kid1.list_body_parts[part].setdna(dna1, seq1)
         kid2.list_body_parts[part].setdna(dna2, seq2)
