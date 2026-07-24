@@ -17,7 +17,6 @@ class Model:
         pass
 
     def get_image(self, sequence: str):
-        return "legs_0"
         return self.dna_image[sequence]
 
     def add_animal(self, animal):
@@ -27,7 +26,6 @@ class Model:
         return self.dna_image
 
     def dna_set_up(self):
-        
         nbimg = 5  # A UPDATE
         for i in range(nbimg):
             self.images.append("tail_" + str(i))
@@ -59,22 +57,22 @@ class Model:
 
 
     def get_random_seq(self, part : str, avoid: list[str]=None):
-                """
-                Return None if their is no body part left without choosing one that must be avoid \n
-                """
-                if not avoid : avoid = []
-                if len(avoid) > 5: return None
-    
-                #Take all the dna sequences linked to the body part
-                dna = []
-                dict = self.get_dna_image()
-                for elt in dict:
-                    #Récupération de la string
-                    p = ""
-                    for char in dict[elt]:
-                        if char == '_': break
-                        else: p += char
-                    #add if it's the good part
-                    if p == part : dna.append(elt)
-    
-                return dna[randint(0, len(dna)-1)]
+        """
+        Return None if their is no body part left without choosing one that must be avoid \n
+        """
+        if not avoid : avoid = []
+        if len(avoid) > 5: return None
+
+        #Take all the dna sequences linked to the body part
+        dna = []
+        dict = self.get_dna_image()
+        for elt in dict:
+            #Récupération de la string
+            p = ""
+            for char in dict[elt]:
+                if char == '_': break
+                else: p += char
+            #add if it's the good part
+            if p == part : dna.append(elt)
+
+        return dna[randint(0, len(dna)-1)]
