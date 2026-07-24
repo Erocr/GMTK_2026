@@ -53,6 +53,7 @@ class Controller:
                 # print(index) ???
 
         for animal in self.model.animals:
+            print(animal)
             animal.move()
 
         
