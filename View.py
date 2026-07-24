@@ -93,7 +93,7 @@ class View:
         self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get())
 
     def draw_image_flipped(self, image_name : str, pos):
-        self.screen.blit( pg.transform.flip( self.images[image_name] , False, True) , (pos*self.screen_ratio).get())
+        self.screen.blit( pg.transform.flip( self.images[image_name] , True, False) , (pos*self.screen_ratio).get())
 
     def draw_image_rotated(self, image_name : str, pos, angle):
         self.screen.blit( pg.transform.rotate( self.images[image_name] , angle) , (pos*self.screen_ratio).get())
@@ -108,13 +108,14 @@ class View:
             for key in self.body_parts_ordered:
                 self.draw_image_flipped(self.model.get_image(animal.specie.list_body_parts[key].active_sec), animal.pos)
         else:
-            if animal.dir == "up":
-                angle = -90
-            elif animal.dir == "down":
-                angle = 90
+            # if animal.dir == "up":
+            #     angle = -90
+            # elif animal.dir == "down":
+            #     angle = 90
 
-            for key in self.body_parts_ordered:
-                self.draw_image_rotated(self.model.get_image(animal.specie.list_body_parts[key].active_sec), animal.pos, angle)
+            # for key in self.body_parts_ordered:
+            #     self.draw_image_rotated(self.model.get_image(animal.specie.list_body_parts[key].active_sec), animal.pos, angle)
+            pass
 
 
     def draw_text(self, pos, text, color=(0, 0, 0)):
