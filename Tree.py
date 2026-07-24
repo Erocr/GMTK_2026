@@ -1,6 +1,5 @@
 from random import randint
 from Specie import Specie
-from Model import Model
 
 class Tree:
     def __init__(self, common_ancestor: Specie):
