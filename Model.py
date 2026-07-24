@@ -103,6 +103,4 @@ class Model:
     
             kid1.list_body_parts[part].setdna(dna1, seq1)
             kid2.list_body_parts[part].setdna(dna2, seq2)
-            self.add_animal(kid1)
-            self.add_animal(kid2)
             return kid1, kid2
