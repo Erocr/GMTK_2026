@@ -6,7 +6,7 @@ from Tree import Tree
 
 
 class Controller:
-    def __init__(self, model:Model, view):
+    def __init__(self, model: Model, view):
         self.model = model
         self.view = view
         self.inputHandler = InputHandler(view)
@@ -28,8 +28,8 @@ class Controller:
             children.append(kid2)
             waiting_children.append(kid1)
             children.append(kid2)
-            for kid in waiting_children : 
-                self.create_children(tree, kid,etage-1, children)
+            for kid in waiting_children:
+                self.create_children(tree, kid, etage-1, children)
             
 
 
@@ -54,8 +54,3 @@ class Controller:
 
         for animal in self.model.animals:
             animal.move()
-
-
-model = Model()
-test = Controller(model, None)
-print(model.dna_image[test.get_random_seq("torso")])

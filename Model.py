@@ -1,6 +1,10 @@
-from itertools import combinations
 from random import randint, shuffle
+from Vec import Vec
+
+
 class Model:
+    SCREEN_SIZE = Vec(1920, 1280)
+
     def __init__(self):
         self.SCREEN_LENGTH = 1280
         self.SCREEN_WIDTH = 1920
@@ -12,7 +16,8 @@ class Model:
     def update(self):
         pass
 
-    def get_image(self, sequence : str):
+    def get_image(self, sequence: str):
+        return "legs_0"
         return self.dna_image[sequence]
 
     def add_animal(self, animal):
@@ -23,12 +28,12 @@ class Model:
 
     def dna_set_up(self):
         
-        nbimg = 5 #A UPDATE
+        nbimg = 5  # A UPDATE
         for i in range(nbimg):
-            self.images.append("tail_"+ str(i))
-            self.images.append("torso_"+ str(i))
-            self.images.append("head_"+ str(i))
-            self.images.append("legs_"+ str(i))
+            self.images.append("tail_" + str(i))
+            self.images.append("torso_" + str(i))
+            self.images.append("head_" + str(i))
+            self.images.append("legs_" + str(i))
 
         col = ['R','V','B']*8
         for i in range(200):
@@ -40,7 +45,8 @@ class Model:
                 self.dna_image[seq] = None
             else:
                 while seq in self.dna_image:
-                    seq = shuffle(col)
+                    seq = col.copy()
+                    shuffle(seq)
                 self.dna_image[seq] = None
 
         nb_dna = [0]*20

@@ -1,10 +1,9 @@
 from random import randint
-from Animal import Animal
+from Specie import Specie
 from Model import Model
 
-class Tree :
-
-    def __init__(self, common_ancestor: Animal, model : Model):
+class Tree:
+    def __init__(self, common_ancestor: Specie, model: Model):
         """
         The commun ancestor has a value of None in the dict of the direct ancestors
         """
@@ -12,7 +11,7 @@ class Tree :
         self.direct_ancestors = {common_ancestor: None}
         self.model = model
 
-    def add_animal(self, animal: Animal, ancestor: Animal):
+    def add_animal(self, animal: Specie, ancestor: Specie):
         self.direct_ancestors[animal] = ancestor
 
     def is_ancestor(self, animal1, animal2):
@@ -21,32 +20,34 @@ class Tree :
         """
         return self.direct_ancestor[animal1] == animal2
 
+    def create_kid(self, ancestor: Specie):
+        p = randint(0, 3)
+        part = ["head", "torso", "legs", "tail"][p]
+        ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
+        kid1, kid2 = ancestor.copy(), ancestor.copy()
+        dna1 = kid1.list_body_parts[part].getdna()
+        dna2 = kid2.list_body_parts[part].getdna()
+        # TODO : randomize seq1 & seq2
+        seq1 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec])
+        seq2 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec, seq1])
+        if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
+            dna1 += kid1.list_body_parts[part].getdna()+ seq1
+            dna2 += kid2.list_body_parts[part].getdna()+ seq2
+        else:
+            dna1 = ancestor.list_body_parts[part].getdna()[0:ind] + seq1 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
+            dna2 = ancestor.list_body_parts[part].getdna()[0:ind] + seq2 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
+        """for i in range(0, len(ancestor.list_body_parts[part].dna_sec), 8):
+            if i == ind:
+                for j in range(8):
+                    dna1 += seq1[j]
+                    dna2 += seq2[j]
+            if i<ind:
+                for j in range(8):
+                    dna1[i+j] = ancestor.list_body_parts[part].dna_sec[j]
+                    dna2[i+j] = ancestor.list_body_parts[part].dna_sec[j] """
 
-    def create_kid(self, ancestor : Animal):
-            p = randint(0, 3)
-            part = ["head", "torso", "legs", "tail"][p]
-            ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
-            kid1, kid2 = ancestor.copy(), ancestor.copy()
-            dna1 = kid1.list_body_parts[part].getdna()
-            dna2 = kid2.list_body_parts[part].getdna()
-            # TODO : randomize seq1 & seq2
-            seq1 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec])
-            seq2 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec, seq1])
-            if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
-                dna1 += seq1
-                dna2 += seq2
-            for i in range(0, len(ancestor.list_body_parts[part].dna_sec), 8):
-                if i == ind:
-                    for j in range(8):
-                        dna1[i+j] = seq1[j]
-                        dna2[i+j] = seq2[j]
-                if i<ind:
-                    for j in range(8):
-                        dna1[i+j] = ancestor.list_body_parts[part][j]
-                        dna2[i+j] = ancestor.list_body_parts[part][j]
-
-            kid1.list_body_parts[part].setdna(dna1, seq1)
-            kid2.list_body_parts[part].setdna(dna2, seq2)
-            self.add_animal(kid1, ancestor)
-            self.add_animal(kid2, ancestor)
-            return kid1, kid2
+        kid1.list_body_parts[part].setdna(dna1, seq1)
+        kid2.list_body_parts[part].setdna(dna2, seq2)
+        self.add_animal(kid1, ancestor)
+        self.add_animal(kid2, ancestor)
+        return kid1, kid2

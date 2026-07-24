@@ -1,10 +1,12 @@
 from Animal import Animal
 from BodyPart import BodyPart
 from Tree import Tree
+from Vec import Vec
 from View import View
 from Controller import Controller
 from Model import Model
 from Animal import Animal
+from Specie import Specie
 from BodyPart import BodyPart
 
 import time
@@ -22,15 +24,16 @@ def play():
 
     
     # create ancestor body parts
-    head = BodyPart(controller.get_random_seq("head"))
-    torso = BodyPart(controller.get_random_seq("torso"))
-    legs = BodyPart(controller.get_random_seq("legs"))
-    tail = BodyPart(controller.get_random_seq("tail"))
+    head = BodyPart(model.get_random_seq("head"))
+    torso = BodyPart(model.get_random_seq("torso"))
+    legs = BodyPart(model.get_random_seq("legs"))
+    tail = BodyPart(model.get_random_seq("tail"))
 
     # create animals
-    ancestor = Animal(head,torso,legs,tail,0,0,model)
-    tree = Tree(ancestor,model)
-    controller.create_children(tree, ancestor, 20)
+    specie = Specie(head, torso, legs, tail, model)
+    ancestor = Animal(Vec(0, 0), specie)
+    tree = Tree(specie, model)
+    controller.create_children(tree, specie, 20)
 
     # Game loop
     while not controller.quit:

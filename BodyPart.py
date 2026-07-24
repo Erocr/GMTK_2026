@@ -1,8 +1,8 @@
 class BodyPart:
 
-    def __init__(self, dna_sec : str):
+    def __init__(self, dna_sec: str):
         self.dna_sec = dna_sec
-        self.active_sec = "" # 8 caractère
+        self.active_sec = ""  # 8 caractère
         self.pos_x = 0
         self.pos_y = 0
 
