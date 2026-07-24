@@ -1,6 +1,7 @@
 from InputHandler import InputHandler, Key
 from Model import Model
 from Vec import Vec
+from Tree import Tree
 
 
 class Controller:
@@ -12,6 +13,22 @@ class Controller:
     @property
     def quit(self):
         return self.inputHandler.quit
+    
+    def create_children(self, tree:Tree, ancestor, etage, children = None):
+        if children is None:
+            children = [ancestor]
+        if etage == 0:
+            print(children)
+            return children
+        else:
+            waiting_children = []
+            kid1, kid2 = tree.create_kid(ancestor)
+            children.append(kid1,kid2)
+            waiting_children.append(kid1,kid2)
+            for kid in waiting_children : 
+                self.create_children(tree, kid,etage-1, children)
+            
+
 
     def search_animal(self,pos:Vec):
         for animal in self.model.animals:

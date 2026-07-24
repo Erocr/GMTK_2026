@@ -1,3 +1,6 @@
+from Animal import Animal
+from BodyPart import BodyPart
+from Tree import Tree
 from View import View
 from Controller import Controller
 from Model import Model
@@ -12,6 +15,18 @@ def play():
 
     FPS = 60
     LOOP_TIME = 1 / FPS
+
+    
+    # create ancestor body parts
+    head = BodyPart()
+    torso = BodyPart()
+    legs = BodyPart()
+    tail = BodyPart()
+
+    # create animals
+    ancestor = Animal(head,torso,legs,tail,0,0,model)
+    tree = Tree(ancestor,model)
+    controller.create_children(tree, ancestor, 20)
 
     # Game loop
     while not controller.quit:
