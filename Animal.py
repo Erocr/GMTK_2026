@@ -53,8 +53,8 @@ class Animal:
 
 
         """décalage des membres inutile normalement"""
-        # self.pos_x = x
-        # self.pos_y = y
+        self.pos_x = x
+        self.pos_y = y
 
         # if(self.dir ==  "left"):
         #     # head (oups)
@@ -129,10 +129,10 @@ class Animal:
         now = time.time()
         if(now - self.start > 60):
             self.start = now
-            x_goal = random.randint(0,Model.SCREEN_LENGTH)
-            y_goal = random.randint(0,Model.SCREEN_WIDTH)
+            x_goal = random.randint(0,self.model.SCREEN_LENGTH)
+            y_goal = random.randint(0,self.model.SCREEN_WIDTH)
         
-        self.go_to(x_goal,y_goal)
+            self.go_to(x_goal,y_goal)
     
     def go_to(self,x,y):
         # ràv avec la fonction set_pos pas touche
