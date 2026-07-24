@@ -21,30 +21,31 @@ class Tree:
         return self.direct_ancestor[animal1] == animal2
 
     def create_kid(self, ancestor: Specie):
-            p = randint(0, 3)
-            part = ["head", "torso", "legs", "tail"][p]
-            ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
-            kid1, kid2 = ancestor.copy(), ancestor.copy()
-            dna1 = kid1.list_body_parts[part].getdna()
-            dna2 = kid2.list_body_parts[part].getdna()
-            # TODO : randomize seq1 & seq2
-            seq1 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec])
-            seq2 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec, seq1])
-            if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
-                dna1 += seq1
-                dna2 += seq2
-            for i in range(0, len(ancestor.list_body_parts[part].dna_sec), 8):
-                if i == ind:
-                    for j in range(8):
-                        dna1[i+j] = seq1[j]
-                        dna2[i+j] = seq2[j]
-                if i<ind:
-                    for j in range(8):
-                        dna1[i+j] = ancestor.list_body_parts[part][j]
-                        dna2[i+j] = ancestor.list_body_parts[part][j]
+        return None, None
+        p = randint(0, 3)
+        part = ["head", "torso", "legs", "tail"][p]
+        ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
+        kid1, kid2 = ancestor.copy(), ancestor.copy()
+        dna1 = kid1.list_body_parts[part].getdna()
+        dna2 = kid2.list_body_parts[part].getdna()
+        # TODO : randomize seq1 & seq2
+        seq1 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec])
+        seq2 = self.model.get_random_seq(part, [ancestor.list_body_parts[part].active_sec, seq1])
+        if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
+            dna1 += seq1
+            dna2 += seq2
+        for i in range(0, len(ancestor.list_body_parts[part].dna_sec), 8):
+            if i == ind:
+                for j in range(8):
+                    dna1[i+j] = seq1[j]
+                    dna2[i+j] = seq2[j]
+            if i<ind:
+                for j in range(8):
+                    dna1[i+j] = ancestor.list_body_parts[part].dna_sec[j]
+                    dna2[i+j] = ancestor.list_body_parts[part].dna_sec[j]
 
-            kid1.list_body_parts[part].setdna(dna1, seq1)
-            kid2.list_body_parts[part].setdna(dna2, seq2)
-            self.add_animal(kid1, ancestor)
-            self.add_animal(kid2, ancestor)
-            return kid1, kid2
+        kid1.list_body_parts[part].setdna(dna1, seq1)
+        kid2.list_body_parts[part].setdna(dna2, seq2)
+        self.add_animal(kid1, ancestor)
+        self.add_animal(kid2, ancestor)
+        return kid1, kid2

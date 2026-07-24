@@ -24,10 +24,10 @@ def play():
 
     
     # create ancestor body parts
-    head = BodyPart(controller.get_random_seq("head"))
-    torso = BodyPart(controller.get_random_seq("torso"))
-    legs = BodyPart(controller.get_random_seq("legs"))
-    tail = BodyPart(controller.get_random_seq("tail"))
+    head = BodyPart(model.get_random_seq("head"))
+    torso = BodyPart(model.get_random_seq("torso"))
+    legs = BodyPart(model.get_random_seq("legs"))
+    tail = BodyPart(model.get_random_seq("tail"))
 
     # create animals
     specie = Specie(head, torso, legs, tail, model)

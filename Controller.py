@@ -52,8 +52,3 @@ class Controller:
 
         for animal in self.model.animals:
             animal.move()
-
-
-model = Model()
-test = Controller(model, None)
-print(model.dna_image[test.get_random_seq("torso")])
