@@ -15,5 +15,6 @@ class BodyPart:
     def getdna(self):
         return self.dna_sec
 
-    def setdna(self, newdna):
-        self.dna_sec = newdna
+    def adddna(self, newdna):
+        self.active_sec = newdna
+        self.dna_sec += newdna
