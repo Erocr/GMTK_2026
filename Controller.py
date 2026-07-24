@@ -35,7 +35,7 @@ class Controller:
 
     def search_animal(self,mouse_pos:Vec):
         for animal in self.model.animals:
-            if(animal.pos_x == mouse_pos.x and animal.pos_y == mouse_pos.y):
+            if(animal.pos.x == mouse_pos.x and animal.pos.y == mouse_pos.y):
                 #TODO prévenir l'animal qu'il est cliqué ? ouvrir la fenêtre de découpage d'adn
                 pass
 
