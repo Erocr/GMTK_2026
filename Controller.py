@@ -53,8 +53,7 @@ class Controller:
 
     def get_random_seq(self, part : str, avoid: list[str]=None):
             """
-            Return None if their is no body part left without choosing one that must be avoid
-            /!\\ To have a torso, part must be "body"
+            Return None if their is no body part left without choosing one that must be avoid \n
             """
             if not avoid : avoid = []
             if len(avoid) > 5: return None
@@ -74,6 +73,6 @@ class Controller:
             return dna[randint(0, len(dna)-1)]
 
 
-""" model = Model()
+model = Model()
 test = Controller(model, None)
-print(model.dna_image[test.get_random_seq("head")]) """
+print(model.dna_image[test.get_random_seq("torso")])
