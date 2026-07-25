@@ -10,6 +10,7 @@ class Animal:
         self.pos = pos
         self.goal_pos = self.pos
         self.specie = specie
+        self.list_body_parts = {"head": specie.list_body_parts["head"], "legs": specie.list_body_parts["legs"], "torso": specie.list_body_parts["torso"], "tail": specie.list_body_parts["tail"]}
         self.start = time.time() - 60  # Commence instant en bougeant
         self.dir = "right"
 
