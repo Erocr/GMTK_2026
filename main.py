@@ -34,6 +34,8 @@ def play():
     tree = Tree(specie)
     model.set_tree(tree)
     controller.create_children(tree, specie, 20)
+    model.fill_animals()
+    print(model.animals)
 
     # Game loop
     while not controller.quit:

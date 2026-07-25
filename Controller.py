@@ -24,6 +24,8 @@ class Controller:
         else:
             waiting_children = []
             kid1, kid2 = self.model.create_kid(ancestor)
+            tree.add_animal(kid1, ancestor)
+            tree.add_animal(kid2, ancestor)
             children.append(kid1)
             children.append(kid2)
             waiting_children.append(kid1)
@@ -53,6 +55,5 @@ class Controller:
                 # print(index) ???
 
         for animal in self.model.animals:
-            print(animal)
             animal.move()
 

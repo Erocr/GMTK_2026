@@ -22,7 +22,6 @@ class Model:
 
     def set_tree(self, tree: Tree):
         self.tree = tree
-        self.fill_animals()
 
     def get_image(self, sequence: str):
         return self.dna_image[sequence]
