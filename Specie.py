@@ -16,9 +16,9 @@ class Specie:
     def __hash__(self):
         return hash(self.id)
 
-    def __eq__(self, animal2):
+    def __eq__(self, spec2 : "Specie"):
         for bodypart in self.list_body_parts:
-            if self.list_body_parts[bodypart] != animal2.list_body_parts[bodypart]: return False
+            if self.list_body_parts[bodypart] != spec2.list_body_parts[bodypart]: return False
         return True
 
     def copy(self):
