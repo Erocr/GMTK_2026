@@ -18,7 +18,7 @@ class Controller:
     def quit(self):
         return self.inputHandler.quit
 
-    def search_animal(self,mouse_pos:Vec):
+    def search_animal(self, mouse_pos: Vec):
         for animal in self.model.animals:
             if(animal.pos.x <= mouse_pos.x and animal.pos.x + 743 >= mouse_pos.x and animal.pos.y <= mouse_pos.y and animal.pos.y + 458 >= mouse_pos.y):
                 if self.view.left_dna_editor is not None:

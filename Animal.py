@@ -4,7 +4,6 @@ from Vec import Vec
 from Specie import Specie
 
 
-
 class Animal:
     def __init__(self, pos: Vec, specie: Specie):
         self.pos = pos

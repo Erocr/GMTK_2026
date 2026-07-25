@@ -1,3 +1,5 @@
+import time
+
 import pygame as pg
 from BodyPart import BodyPart
 from Vec import *
@@ -38,7 +40,11 @@ class View:
 
     def resize_images(self):
         for image_name in self.images_full:
-            self.images[image_name] = pg.transform.scale_by(self.images_full[image_name], self.screen_ratio.get())
+            self.images[image_name] = pg.transform.scale_by(self.images_full[image_name], self.screen_ratio.get()).convert_alpha()
+        for body_part in self.body_parts_ordered:
+            for i in range(5):
+                image_name = body_part + f"_{i}"
+                self.images[image_name+"_flipped"] = pg.transform.flip(self.images[image_name], True, False).convert_alpha()
 
     def load_images(self):
         for file_name in os.listdir("assets/images"):
@@ -51,7 +57,7 @@ class View:
         """
         image_name = file_name.split(".")[0]
         file_name = "assets/images/" + file_name
-        image = pg.image.load(file_name)
+        image = pg.image.load(file_name).convert_alpha()
         self.images_full[image_name] = image
 
     def empty_surf(self, size: Vec) -> pg.Surface:
@@ -84,18 +90,14 @@ class View:
             y += self.images_full["ADN_no_bars"].get_height()
             index += 8
 
-    def draw_image(self, image_name : str, pos):
+    def draw_image(self, image_name: str, pos):
         self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get())
 
-    def draw_image_flipped(self, image_name : str, pos):
-        self.screen.blit( pg.transform.flip( self.images[image_name] , True, False) , (pos*self.screen_ratio).get())
-
-    def draw_image_rotated(self, image_name : str, pos, angle):
-        self.screen.blit( pg.transform.rotate( self.images[image_name] , angle) , (pos*self.screen_ratio).get())
+    def draw_image_flipped(self, image_name: str, pos):
+        self.screen.blit(self.images[image_name+"_flipped"], (pos*self.screen_ratio).get())
     
     def draw_animal(self, animal: Animal):
-        
-        """ Tourner les images selon la direction: de base elle va vers la gauche"""
+        """ Tourner les images selon la direction: de base, elle va vers la gauche"""
         if animal.dir == "left":
             for key in self.body_parts_ordered:
                 self.draw_image(self.model.get_image(animal.list_body_parts[key].active_sec), animal.pos)
@@ -103,15 +105,7 @@ class View:
             for key in self.body_parts_ordered:
                 self.draw_image_flipped(self.model.get_image(animal.list_body_parts[key].active_sec), animal.pos)
         else:
-            # if animal.dir == "up":
-            #     angle = -90
-            # elif animal.dir == "down":
-            #     angle = 90
-
-            # for key in self.body_parts_ordered:
-            #     self.draw_image_rotated(self.model.get_image(animal.list_body_parts[key].active_sec), animal.pos, angle)
             pass
-
 
     def draw_text(self, pos, text, color=(0, 0, 0)):
         pos *= self.screen_ratio
@@ -126,7 +120,7 @@ class View:
     def draw(self):
         #self.draw_image("test", Vec(1900, 1260))
 
-        
+
         for animal in self.model.animals:
             self.draw_animal(animal)
 
