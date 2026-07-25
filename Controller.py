@@ -15,25 +15,6 @@ class Controller:
     @property
     def quit(self):
         return self.inputHandler.quit
-    
-    def create_children(self, tree:Tree, ancestor, etage, children = None):
-        if children is None:
-            children = [ancestor]
-        if etage == 0:
-            return children
-        else:
-            waiting_children = []
-            kid1, kid2 = self.model.create_kid(ancestor)
-            tree.add_animal(kid1, ancestor)
-            tree.add_animal(kid2, ancestor)
-            children.append(kid1)
-            children.append(kid2)
-            waiting_children.append(kid1)
-            children.append(kid2)
-            for kid in waiting_children:
-                self.create_children(tree, kid, etage-1, children)
-            
-
 
     def search_animal(self,mouse_pos:Vec):
         for animal in self.model.animals:

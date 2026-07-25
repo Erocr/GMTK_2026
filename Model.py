@@ -1,5 +1,6 @@
 from random import randint, shuffle
 from Animal import Animal
+from BodyPart import BodyPart
 from Vec import Vec
 from Specie import Specie
 from Tree import Tree
@@ -16,6 +17,23 @@ class Model:
         self.dna_image = {}
         self.images = []
         self.dna_set_up()
+        self._init()
+
+    def _init(self):
+        # create ancestor body parts
+        head = BodyPart(self.get_random_seq("head"))
+        torso = BodyPart(self.get_random_seq("torso"))
+        legs = BodyPart(self.get_random_seq("legs"))
+        tail = BodyPart(self.get_random_seq("tail"))
+
+        # create animals
+        specie = Specie(head, torso, legs, tail, self)
+        # ancestor = Animal(Vec(0, 0), specie)
+        tree = Tree(specie)
+        self.set_tree(tree)
+        self.create_children(tree, specie, 20)
+        self.fill_animals()
+        print(self.animals)
 
     def update(self):
         for animal in self.animals:
@@ -85,6 +103,22 @@ class Model:
 
         return dna[randint(0, len(dna)-1)]
 
+    def create_children(self, tree:Tree, ancestor, etage, children = None):
+        if children is None:
+            children = [ancestor]
+        if etage == 0:
+            return children
+        else:
+            waiting_children = []
+            kid1, kid2 = self.create_kid(ancestor)
+            tree.add_animal(kid1, ancestor)
+            tree.add_animal(kid2, ancestor)
+            children.append(kid1)
+            children.append(kid2)
+            waiting_children.append(kid1)
+            children.append(kid2)
+            for kid in waiting_children:
+                self.create_children(tree, kid, etage-1, children)
 
     def create_kid(self, ancestor: Specie):
             p = randint(0, 3)

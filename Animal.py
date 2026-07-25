@@ -36,7 +36,7 @@ class Animal:
     def change_direction(self):
         now = time.time()
         if now - self.start > 60:
-            self.start = now
+            self.start = now + random.randint(0, 30)
             x_goal = random.randint(0, self.specie.model.SCREEN_SIZE.x - 743)  # 743 is the width of an animal
             y_goal = random.randint(0, self.specie.model.SCREEN_SIZE.y - 458)  # 458 is the height of an animal
 
