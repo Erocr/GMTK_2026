@@ -125,7 +125,8 @@ class Model:
             p = randint(0, 3)
             part = ["head", "torso", "legs", "tail"][p]
             ind = randint(0, (len(ancestor.list_body_parts[part].dna_sec))//8)
-            kid1, kid2 = ancestor.copy(), ancestor.copy()
+            kid1 = Specie(ancestor.list_body_parts["head"],ancestor.list_body_parts["legs"],ancestor.list_body_parts["torso"],ancestor.list_body_parts["tail"],ancestor.model) #ancestor.copy()
+            kid2 = Specie(ancestor.list_body_parts["head"],ancestor.list_body_parts["legs"],ancestor.list_body_parts["torso"],ancestor.list_body_parts["tail"],ancestor.model) #ancestor.copy()
             dna1 = kid1.list_body_parts[part].getdna()
             dna2 = kid2.list_body_parts[part].getdna()
 
