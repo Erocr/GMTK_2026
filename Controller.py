@@ -20,7 +20,7 @@ class Controller:
 
     def search_animal(self, mouse_pos: Vec):
         for animal in self.model.animals:
-            if(animal.pos.x <= mouse_pos.x and animal.pos.x + 743 >= mouse_pos.x and animal.pos.y <= mouse_pos.y and animal.pos.y + 458 >= mouse_pos.y):
+            if (animal.pos.x <= mouse_pos.x and animal.pos.x + Model.ANIMAL_SIZE.x >= mouse_pos.x and animal.pos.y <= mouse_pos.y and animal.pos.y + Model.ANIMAL_SIZE.y >= mouse_pos.y):
                 if self.view.left_dna_editor is not None:
                     self.view.right_dna_editor = DnaEditor(animal, False, None, self.view)
                     self.model.dna_2 = Dna(Vec(1550, 600), 600, animal.get_dna())
@@ -40,7 +40,4 @@ class Controller:
             if self.view.model.dna_1 is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
                 # print(index) ???
-
-        for animal in self.model.animals:
-            animal.move()
 
