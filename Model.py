@@ -9,6 +9,8 @@ from itertools import combinations
 
 class Model:
     SCREEN_SIZE = Vec(1920, 1280)
+    ANIMAL_SIZE_RATIO = 0.6
+    ANIMAL_SIZE = Vec(743, 458) * ANIMAL_SIZE_RATIO
 
     def __init__(self):
         self.SCREEN_LENGTH = 1280
@@ -152,6 +154,6 @@ class Model:
     def fill_animals(self):
         last_gen = self.tree.get_last_gen()
         for spec in last_gen:
-            x = randint(0, self.SCREEN_SIZE.x - 743)  # 743 is the width of an animal
-            y = randint(0, self.SCREEN_SIZE.y - 458)  # 458 is the height of an animal
+            x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
+            y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))

@@ -1,15 +1,13 @@
 import time
 
 import pygame as pg
-from BodyPart import BodyPart
 from Vec import *
 import os
 from Animal import Animal
+from Model import Model
 
 
 class View:
-    ANIMAL_SIZE_RATIO = 0.5
-
     def __init__(self, model):
         self.model = model
 
@@ -52,7 +50,7 @@ class View:
         for image_name in self.images_full:
             screen_ratio = self.screen_ratio
             if self.is_animal_image(image_name):
-                screen_ratio *= self.ANIMAL_SIZE_RATIO
+                screen_ratio *= Model.ANIMAL_SIZE_RATIO
             self.images[image_name] = pg.transform.scale_by(self.images_full[image_name], screen_ratio.get()).convert_alpha()
 
         for body_part in self.body_parts_ordered:
@@ -64,7 +62,7 @@ class View:
             self.animations[animation + "_flipped"] = [None] * 14
             for i in range(len(self.animations_full[animation])):
                 self.animations[animation][i] = pg.transform.scale_by(self.animations_full[animation][i],
-                                                                      (self.screen_ratio * self.ANIMAL_SIZE_RATIO).get()).convert_alpha()
+                                                                      (self.screen_ratio * Model.ANIMAL_SIZE_RATIO).get()).convert_alpha()
                 self.animations[animation+"_flipped"][i] = pg.transform.flip(self.animations[animation][i], True, False).convert_alpha()
 
     def load_images(self):
