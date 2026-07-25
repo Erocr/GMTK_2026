@@ -5,12 +5,15 @@ from Specie import Specie
 
 
 class Animal:
+    LEG_ANIM_FRAME_DURATION = 0.1
+
     def __init__(self, pos: Vec, specie: Specie):
         self.pos = pos
         self.goal_pos = self.pos
         self.specie = specie
         self.list_body_parts = {"head": specie.list_body_parts["head"], "legs": specie.list_body_parts["legs"], "torso": specie.list_body_parts["torso"], "tail": specie.list_body_parts["tail"]}
-        self.start = time.time() - 60  # Commence instant en bougeant
+        self.startMovementTime = time.time()  # Commence en bougeant
+        self.nextDirectionChoseTime = time.time()
         self.dir = "right"
 
     def set_pos(self, new_pos):
@@ -35,8 +38,9 @@ class Animal:
 
     def change_direction(self):
         now = time.time()
-        if now - self.start > 11:
-            self.start = now + random.randint(0, 3)
+        if now > self.nextDirectionChoseTime:
+            self.startMovementTime = now
+            self.nextDirectionChoseTime = now + random.randint(3, 8)
             x_goal = random.randint(0, self.specie.model.SCREEN_SIZE.x - 743)  # 743 is the width of an animal
             y_goal = random.randint(0, self.specie.model.SCREEN_SIZE.y - 458)  # 458 is the height of an animal
 

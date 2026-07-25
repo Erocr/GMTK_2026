@@ -1,6 +1,7 @@
 from random import randint
 from Specie import Specie
 
+
 class Tree:
     def __init__(self, common_ancestor: Specie):
         """
@@ -17,7 +18,6 @@ class Tree:
         Test if animal2 is the ancestor of animal1
         """
         return self.direct_ancestor[animal1] == animal2
-
 
     def get_last_gen(self):
         ancestor = set(self.direct_ancestors.keys())
