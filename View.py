@@ -8,7 +8,7 @@ from Animal import Animal
 
 
 class View:
-    ANIMAL_SIZE_RATIO = 0.8
+    ANIMAL_SIZE_RATIO = 0.5
 
     def __init__(self, model):
         self.model = model
@@ -146,10 +146,9 @@ class View:
         pg.draw.rect(self.screen, color, pg.Rect(*pos.get(), *size.get()))
 
     def draw(self):
-        #self.draw_image("test", Vec(1900, 1260))
-
-
-        for animal in self.model.animals:
+        animals = self.model.animals.copy()
+        animals.sort(key=lambda animal: animal.pos.y)
+        for animal in animals:
             self.draw_animal(animal)
 
         if self.left_dna_editor is not None:
