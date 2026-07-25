@@ -8,8 +8,9 @@ from Specie import Specie
 class Animal:
     def __init__(self, pos: Vec, specie: Specie):
         self.pos = pos
+        self.goal_pos = self.pos
         self.specie = specie
-        self.start = time.time()
+        self.start = time.time() - 60  # Commence instant en bougeant
         self.dir = "right"
 
     def set_pos(self, new_pos):
@@ -17,114 +18,46 @@ class Animal:
 
         diff = self.pos - new_pos
 
-        if abs(diff.x) > abs(diff.y):
-            if diff.x > 0:
-                self.dir = "left"
-            else:
-                self.dir = "right"
+        if diff.x > 0:
+            self.dir = "left"
         else:
-            if diff.y > 0:
-                self.dir = "up"
-            else:
-                self.dir = "down"
+            self.dir = "right"
 
-        """décalage des membres inutile normalement"""
+        """
+        décalage des membres inutile normalement
+        On peut le retrouver dans les anciens commits sur git
+        """
         self.pos = new_pos
 
-        # if(self.dir ==  "left"):
-        #     # head (oups)
-        #     self.list_body_parts["head"].set_x(self.pos_x + 2)
-        #     self.list_body_parts["head"].set_y(self.pos_y - 2)
+    def update(self):
+        self.change_direction()
+        self.move()
 
-        #     # legs
-        #     self.list_body_parts["legs"].set_x(self.pos_x)
-        #     self.list_body_parts["legs"].set_y(self.pos_y + 2)
-
-        #     # tail
-        #     self.list_body_parts["tail"].set_x(self.pos_x +2)
-        #     self.list_body_parts["tail"].set_y(self.pos_y)
-
-        #     # torso
-        #     self.list_body_parts["torso"].set_x(self.pos_x)
-        #     self.list_body_parts["torso"].set_y(self.pos_y)
-
-        # elif(self.dir == "right"):
-        #     # head (oups)
-        #     self.list_body_parts["head"].set_x(self.pos_x - 2)
-        #     self.list_body_parts["head"].set_y(self.pos_y + 2)
-
-        #     # legs
-        #     self.list_body_parts["legs"].set_x(self.pos_x)
-        #     self.list_body_parts["legs"].set_y(self.pos_y + 2)
-
-        #     # tail
-        #     self.list_body_parts["tail"].set_x(self.pos_x-2)
-        #     self.list_body_parts["tail"].set_y(self.pos_y)
-
-        #     # torso
-        #     self.list_body_parts["torso"].set_x(self.pos_x)
-        #     self.list_body_parts["torso"].set_y(self.pos_y)
-
-        # elif(self.dir == "up"):
-        #     # head (oups)
-        #     self.list_body_parts["head"].set_x(self.pos_x )
-        #     self.list_body_parts["head"].set_y(self.pos_y - 2)
-
-        #     # legs --> rotate ? en dessous ?
-        #     self.list_body_parts["legs"].set_x(self.pos_x)
-        #     self.list_body_parts["legs"].set_y(self.pos_y)
-
-        #     # tail
-        #     self.list_body_parts["tail"].set_x(self.pos_x-2)
-        #     self.list_body_parts["tail"].set_y(self.pos_y)
-
-        #     # torso
-        #     self.list_body_parts["torso"].set_x(self.pos_x)
-        #     self.list_body_parts["torso"].set_y(self.pos_y)
-
-        # elif(self.dir == "down"):
-        #     # head (oups)
-        #     self.list_body_parts["head"].set_x(self.pos_x - 2)
-        #     self.list_body_parts["head"].set_y(self.pos_y + 2)
-
-        #     # legs
-        #     self.list_body_parts["legs"].set_x(self.pos_x)
-        #     self.list_body_parts["legs"].set_y(self.pos_y + 2)
-
-        #     # tail
-        #     self.list_body_parts["tail"].set_x(self.pos_x-2)
-        #     self.list_body_parts["tail"].set_y(self.pos_y)
-
-        #     # torso
-        #     self.list_body_parts["torso"].set_x(self.pos_x)
-        #     self.list_body_parts["torso"].set_y(self.pos_y)
-    
-    def move(self):
+    def change_direction(self):
         now = time.time()
         if now - self.start > 60:
             self.start = now
-            x_goal = random.randint(0, self.model.SCREEN_LENGTH)
-            y_goal = random.randint(0, self.model.SCREEN_WIDTH)
-        
-            self.go_to(Vec(x_goal, y_goal))
+            x_goal = random.randint(0, self.specie.model.SCREEN_SIZE.x - 743)  # 743 is the width of an animal
+            y_goal = random.randint(0, self.specie.model.SCREEN_SIZE.y - 458)  # 458 is the height of an animal
+
+            self.goal_pos = Vec(x_goal, y_goal)
     
-    def go_to(self, pos):
-        # ràv avec la fonction set_pos pas touche
-        dist = self.pos - pos
+    def move(self):
+        dist = self.goal_pos - self.pos
 
         # x
-        if (dist.x >= 3):
+        if dist.x >= 3:
             x_speed = 3
-        elif (dist.x > -3):
+        elif dist.x > -3:
             x_speed = dist.x
-        elif (dist.x < -3):
+        elif dist.x <= -3:
             x_speed = -3
         # y
-        if (dist.y >= 3):
+        if dist.y >= 3:
             y_speed = 3
-        elif (dist.y > -3):
+        elif dist.y > -3:
             y_speed = dist.y
-        elif (dist.y < -3):
+        elif dist.y <= -3:
             y_speed = -3
         
         self.set_pos(self.pos + Vec(x_speed, y_speed))

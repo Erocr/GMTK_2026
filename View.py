@@ -143,4 +143,4 @@ class View:
 
     def flip(self):
         pg.display.flip()
-        self.screen.fill((0, 0, 0))
+        self.draw_image("background_terrarium_v1", Vec(0, 0))

@@ -29,7 +29,7 @@ def play():
     tail = BodyPart(model.get_random_seq("tail"))
 
     # create animals
-    specie = Specie(head, torso, legs, tail)
+    specie = Specie(head, torso, legs, tail, model)
     # ancestor = Animal(Vec(0, 0), specie)
     tree = Tree(specie)
     model.set_tree(tree)

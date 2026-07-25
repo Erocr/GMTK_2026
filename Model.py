@@ -18,7 +18,8 @@ class Model:
         self.dna_set_up()
 
     def update(self):
-        pass
+        for animal in self.animals:
+            animal.update()
 
     def set_tree(self, tree: Tree):
         self.tree = tree
@@ -108,5 +109,7 @@ class Model:
 
     def fill_animals(self):
         last_gen = self.tree.get_last_gen()
-        for spec in last_gen :
-            self.animals.append(Animal(Vec(500,500),spec))
+        for spec in last_gen:
+            x = randint(0, self.SCREEN_SIZE.x - 743)  # 743 is the width of an animal
+            y = randint(0, self.SCREEN_SIZE.y - 458)  # 458 is the height of an animal
+            self.animals.append(Animal(Vec(x, y), spec))
