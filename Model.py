@@ -19,7 +19,7 @@ class Model:
         self.animals = []
         self.dna_image = {}
         self.images = []
-        self.species_unlocked = []
+        self.unlocked_species = []
         self.dna_set_up()
         self._init()
 
@@ -158,4 +158,14 @@ class Model:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
-            self.species_unlocked.append(spec)
+            self.unlocked_species.append(spec)
+
+    def update_unlocked_species(self, spec1: Specie, spec2: Specie):
+        """
+        Return True if the two species have the same direct ancestor and add it to unlocked and False if they don't have the same direct ancestor
+        """
+        ancestor = self.tree.get_direct_ancestor(spec1, spec2)
+        if ancestor : 
+            self.unlocked_species.append(ancestor)
+            return True
+        else : return False
