@@ -8,7 +8,7 @@ from Model import Model
 
 
 class View:
-    def __init__(self, model):
+    def __init__(self, model : Model):
         self.model = model
 
         self.screen_size_full = Vec(1920, 1280)

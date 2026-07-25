@@ -16,7 +16,7 @@ class Model:
         self.SCREEN_LENGTH = 1280
         self.SCREEN_WIDTH = 1920
         self.tree = None
-        self.animals = []
+        self.animals : list[Animal] = []
         self.dna_image = {}
         self.images = []
         self.dna_set_up()
@@ -33,7 +33,7 @@ class Model:
         tail = BodyPart(self.get_random_seq("tail"))
 
         # create animals
-        specie = Specie(head, torso, legs, tail, self)
+        specie = Specie(head, legs, torso, tail, self)
         # ancestor = Animal(Vec(0, 0), specie)
         self.tree = Tree(specie)
         self.create_children(self.tree, specie, 20)
@@ -95,16 +95,15 @@ class Model:
 
         #Take all the dna sequences linked to the body part
         dna = []
-        dict = self.get_dna_image()
-        for elt in dict:
+        for elt in self.dna_image:
             #Récupération de la string
             p = ""
-            for char in dict[elt]:
-                if char == '_': break
-                else: p += char
+            for charact in self.dna_image[elt]:
+                if charact == '_': break
+                else: p += charact
             #add if it's the good part
-            if p == part : dna.append(elt)
-        a = dna[randint(0, len(dna)-1)]
+            if p == part : 
+                dna.append(elt)
         return dna[randint(0, len(dna)-1)]
 
     def create_children(self, tree:Tree, ancestor, etage, children = None):
