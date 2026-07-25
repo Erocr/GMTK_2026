@@ -110,29 +110,25 @@ class View:
         """ Tourner les images selon la direction: de base, elle va vers la gauche"""
         if animal.dir == "left":
             for key in self.body_parts_ordered:
-                if key == "legs":
+                if key == "legs" and animal.is_moving():
                     anim_i = (time.time() - animal.startMovementTime) / animal.LEG_ANIM_FRAME_DURATION
                     anim_i = int(anim_i)
-                    anim_i = anim_i % 13
+                    anim_i = anim_i % 14
                     anim = self.model.get_image(animal.list_body_parts[key].active_sec)
                     if anim[:4] != "legs":
-                        print(f"anomaly: {anim}")
                         continue
-                    print(f"normal: {anim_i}")
                     self.draw_anim(anim, anim_i, animal.pos)
                 else:
                     self.draw_image(self.model.get_image(animal.list_body_parts[key].active_sec), animal.pos)
         elif animal.dir == "right":
             for key in self.body_parts_ordered:
-                if key == "legs":
+                if key == "legs" and animal.is_moving():
                     anim_i = (time.time() - animal.startMovementTime) / animal.LEG_ANIM_FRAME_DURATION
                     anim_i = int(anim_i)
                     anim_i = anim_i % 13
                     anim = self.model.get_image(animal.list_body_parts[key].active_sec)
                     if anim[:4] != "legs":
-                        print(f"anomaly: {anim}")
                         continue
-                    print(f"normal: {anim_i}")
                     self.draw_anim_flipped(anim, anim_i, animal.pos)
                 else:
                     self.draw_image_flipped(self.model.get_image(animal.list_body_parts[key].active_sec), animal.pos)

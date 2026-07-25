@@ -1,6 +1,6 @@
 import random
 import time
-from Vec import Vec
+from Vec import Vec, dist
 from Specie import Specie
 
 
@@ -35,6 +35,9 @@ class Animal:
     def update(self):
         self.change_direction()
         self.move()
+
+    def is_moving(self):
+        return dist(self.pos, self.goal_pos) > 1
 
     def change_direction(self):
         now = time.time()
