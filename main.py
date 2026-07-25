@@ -33,7 +33,7 @@ def play():
         end = time.time()
         if end - start < LOOP_TIME:
             time.sleep(LOOP_TIME - (end - start))
-        print(1/(end - start))
+        # print(1/(end - start))
 
 
 if __name__ == "__main__":
