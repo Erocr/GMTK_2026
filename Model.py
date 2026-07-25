@@ -1,9 +1,10 @@
-from random import randint, shuffle
+from random import randint
 from Animal import Animal
 from BodyPart import BodyPart
 from Vec import Vec
 from Specie import Specie
 from Tree import Tree
+from itertools import combinations
 
 
 class Model:
@@ -33,7 +34,6 @@ class Model:
         self.set_tree(tree)
         self.create_children(tree, specie, 20)
         self.fill_animals()
-        print(self.animals)
 
     def update(self):
         for animal in self.animals:
@@ -60,17 +60,15 @@ class Model:
             self.images.append("legs_" + str(i))
 
         col = ['R','V','B']*8
+        com = list(combinations(col, 8))
         for i in range(200):
-            shuffle(col)
             seq = ""
-            for elt in col:
-                seq += elt
+            seq = com[randint(0, len(com))]
             if seq not in self.dna_image:
                 self.dna_image[seq] = None
             else:
                 while seq in self.dna_image:
-                    seq = col.copy()
-                    shuffle(seq)
+                    seq = com[randint(0, len(com))]
                 self.dna_image[seq] = None
 
         nb_dna = [0]*20
@@ -100,7 +98,7 @@ class Model:
                 else: p += char
             #add if it's the good part
             if p == part : dna.append(elt)
-
+        a = dna[randint(0, len(dna)-1)]
         return dna[randint(0, len(dna)-1)]
 
     def create_children(self, tree:Tree, ancestor, etage, children = None):
@@ -111,6 +109,9 @@ class Model:
         else:
             waiting_children = []
             kid1, kid2 = self.create_kid(ancestor)
+            """ for elt in kid1.list_body_parts:
+                print(kid1.list_body_parts[elt].active_sec, kid2.list_body_parts[elt].active_sec)
+            print('\n') """
             tree.add_animal(kid1, ancestor)
             tree.add_animal(kid2, ancestor)
             children.append(kid1)
@@ -130,13 +131,15 @@ class Model:
 
             seq1 = self.get_random_seq(part, [ancestor.list_body_parts[part].active_sec])
             seq2 = self.get_random_seq(part, [ancestor.list_body_parts[part].active_sec, seq1])
+
+            #si la nouvel séquence d'adn est rajouté à la fin : 
             if ind == len(ancestor.list_body_parts[part].dna_sec)//8 :
-                dna1 += kid1.list_body_parts[part].getdna()+ seq1
-                dna2 += kid2.list_body_parts[part].getdna()+ seq2
+                dna1 = kid1.list_body_parts[part].getdna()+ seq1
+                dna2 = kid2.list_body_parts[part].getdna()+ seq2
             else:
-                dna1 = ancestor.list_body_parts[part].getdna()[0:ind] + seq1 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
-                dna2 = ancestor.list_body_parts[part].getdna()[0:ind] + seq2 + ancestor.list_body_parts[part].getdna()[ind:len(ancestor.list_body_parts[part].getdna())]
-    
+                #sinon: prend l'adn de l'ancetre jusquà l'indice de la séquence voulu, ajoute la nouvelle séquence puis termin eavec la fin de la séquence de l'ancetre
+                dna1 = ancestor.list_body_parts[part].getdna()[0:ind*8] + seq1 + ancestor.list_body_parts[part].getdna()[ind*8:len(ancestor.list_body_parts[part].getdna())]
+                dna2 = ancestor.list_body_parts[part].getdna()[0:ind*8] + seq2 + ancestor.list_body_parts[part].getdna()[ind*8:len(ancestor.list_body_parts[part].getdna())]
             kid1.list_body_parts[part].setdna(dna1, seq1)
             kid2.list_body_parts[part].setdna(dna2, seq2)
             return kid1, kid2

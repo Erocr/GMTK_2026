@@ -32,5 +32,5 @@ class Specie:
     def get_dna(self):
         dna = ""
         for body_part in self.list_body_parts:
-            dna += self.list_body_parts[body_part].get_dnasec
+            dna += self.list_body_parts[body_part].dna_sec
         return dna
