@@ -19,6 +19,7 @@ class Model:
         self.animals = []
         self.dna_image = {}
         self.images = []
+        self.species_unlocked = []
         self.dna_set_up()
         self._init()
 
@@ -157,3 +158,4 @@ class Model:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
+            self.species_unlocked.append(spec)
