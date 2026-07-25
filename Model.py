@@ -1,4 +1,5 @@
 from random import randint, shuffle
+from Animal import Animal
 from Vec import Vec
 from Specie import Specie
 from Tree import Tree
@@ -21,7 +22,7 @@ class Model:
 
     def set_tree(self, tree: Tree):
         self.tree = tree
-        self.animals = self.tree.get_last_gen()
+        self.fill_animals()
 
     def get_image(self, sequence: str):
         return self.dna_image[sequence]
@@ -105,3 +106,8 @@ class Model:
             kid1.list_body_parts[part].setdna(dna1, seq1)
             kid2.list_body_parts[part].setdna(dna2, seq2)
             return kid1, kid2
+
+    def fill_animals(self):
+        last_gen = self.tree.get_last_gen()
+        for spec in last_gen :
+            self.animals.append(Animal(Vec(500,500),spec))

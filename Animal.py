@@ -2,15 +2,14 @@ import random
 import time
 from Vec import Vec
 from Specie import Specie
-from Controller import Controller
+
 
 
 class Animal:
-    def __init__(self, pos: Vec, specie: Specie, controller: Controller):
+    def __init__(self, pos: Vec, specie: Specie):
         self.pos = pos
         self.specie = specie
         self.start = time.time()
-        controller.add_animal(self)
         self.dir = "right"
 
     def set_pos(self, new_pos):

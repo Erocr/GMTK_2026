@@ -22,4 +22,5 @@ class Tree:
     def get_last_gen(self):
         ancestor = set(self.direct_ancestors.keys())
         gen = set(self.direct_ancestors.values())
+        print(ancestor - gen)
         return ancestor - gen

@@ -56,6 +56,3 @@ class Controller:
             print(animal)
             animal.move()
 
-        
-    def add_animal(self, animal):
-        self.model.add_animal(animal)
