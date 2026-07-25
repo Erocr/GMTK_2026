@@ -10,6 +10,7 @@ class Animal:
         self.pos = pos
         self.goal_pos = self.pos
         self.specie = specie
+        self.list_body_parts = {"head": specie.list_body_parts["head"], "legs": specie.list_body_parts["legs"], "torso": specie.list_body_parts["torso"], "tail": specie.list_body_parts["tail"]}
         self.start = time.time() - 60  # Commence instant en bougeant
         self.dir = "right"
 
@@ -35,8 +36,8 @@ class Animal:
 
     def change_direction(self):
         now = time.time()
-        if now - self.start > 60:
-            self.start = now + random.randint(0, 30)
+        if now - self.start > 11:
+            self.start = now + random.randint(0, 3)
             x_goal = random.randint(0, self.specie.model.SCREEN_SIZE.x - 743)  # 743 is the width of an animal
             y_goal = random.randint(0, self.specie.model.SCREEN_SIZE.y - 458)  # 458 is the height of an animal
 
