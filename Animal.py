@@ -44,23 +44,24 @@ class Animal:
     
     def move(self):
         dist = self.goal_pos - self.pos
+        max_speed = Vec(self.specie.model.SCREEN_SIZE.x*0.002,self.specie.model.SCREEN_SIZE.y*0.002)
 
         # x
-        if dist.x >= 3:
-            x_speed = 3
-        elif dist.x > -3:
+        if dist.x >= max_speed.x:
+            x_speed = max_speed.x
+        elif dist.x > -max_speed.x:
             x_speed = dist.x
-        elif dist.x <= -3:
-            x_speed = -3
+        elif dist.x <= -max_speed.x:
+            x_speed = -max_speed.x
         # y
-        if dist.y >= 3:
-            y_speed = 3
-        elif dist.y > -3:
+        if dist.y >= max_speed.y:
+            y_speed = max_speed.y
+        elif dist.y > -max_speed.y:
             y_speed = dist.y
-        elif dist.y <= -3:
-            y_speed = -3
+        elif dist.y <= -max_speed.y:
+            y_speed = -max_speed.y
         
-        self.set_pos(self.pos + Vec(x_speed, y_speed))
+        self.set_pos(self.pos + Vec(x_speed, y_speed)) 
 
     def get_dna(self):
         dna = ""
