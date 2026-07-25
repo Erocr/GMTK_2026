@@ -52,7 +52,7 @@ class Dna:
 
             bar_size = Vec(-2 * offset_x, 6)
 
-            view.rect(Vec(bar_x, bar_y), bar_size, col)
+            view.rect(Vec(bar_x, bar_y + self.pos.y), bar_size, col)
 
         # Draw the branches
         draw_func(f1, branch1_col, 6)

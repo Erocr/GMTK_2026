@@ -20,6 +20,9 @@ class Model:
         self.dna_set_up()
         self._init()
 
+        self.dna_1 = None
+        self.dna_2 = None
+
     def _init(self):
         # create ancestor body parts
         head = BodyPart(self.get_random_seq("head"))
@@ -60,15 +63,17 @@ class Model:
             self.images.append("legs_" + str(i))
 
         col = ['R','V','B']*8
-        com = list(combinations(col, 8))
+        com = list(combinations(col, 8)) #tuples de merde
         for i in range(200):
             seq = ""
             seq = com[randint(0, len(com))]
+            seq = "".join(seq) #concatène le tuple de char en str
             if seq not in self.dna_image:
                 self.dna_image[seq] = None
             else:
                 while seq in self.dna_image:
                     seq = com[randint(0, len(com))]
+                    seq = "".join(seq) #concatène le tuple de char en str
                 self.dna_image[seq] = None
 
         nb_dna = [0]*20
@@ -137,7 +142,7 @@ class Model:
                 dna1 = kid1.list_body_parts[part].getdna()+ seq1
                 dna2 = kid2.list_body_parts[part].getdna()+ seq2
             else:
-                #sinon: prend l'adn de l'ancetre jusquà l'indice de la séquence voulu, ajoute la nouvelle séquence puis termin eavec la fin de la séquence de l'ancetre
+                #sinon: prend l'adn de l'ancetre jusquà l'indice de la séquence voulue, ajoute la nouvelle séquence puis termine avec la fin de la séquence de l'ancetre
                 dna1 = ancestor.list_body_parts[part].getdna()[0:ind*8] + seq1 + ancestor.list_body_parts[part].getdna()[ind*8:len(ancestor.list_body_parts[part].getdna())]
                 dna2 = ancestor.list_body_parts[part].getdna()[0:ind*8] + seq2 + ancestor.list_body_parts[part].getdna()[ind*8:len(ancestor.list_body_parts[part].getdna())]
             kid1.list_body_parts[part].setdna(dna1, seq1)
