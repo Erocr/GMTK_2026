@@ -22,8 +22,11 @@ class Specie:
         return True
 
     def copy(self):
-        copy = Specie(self.list_body_parts["head"], self.list_body_parts["legs"], self.list_body_parts["torso"],
-                      self.list_body_parts["tail"], self.model)
+        copy = Specie(self.list_body_parts["head"].copy(),
+                      self.list_body_parts["legs"].copy(),
+                      self.list_body_parts["torso"].copy(),
+                      self.list_body_parts["tail"].copy(),
+                      self.model)
         return copy
 
     def set_body_part(self, part: str, new_part: BodyPart):
