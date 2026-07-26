@@ -25,7 +25,7 @@ class Controller:
         if 1226 <= mouse_pos.x and 56 <= mouse_pos.y and 1250 >= mouse_pos.y and self.view.right_dna_editor is not None: return
         if 694 >= mouse_pos.x and 56 <= mouse_pos.y and 1250 >= mouse_pos.y and self.view.left_dna_editor is not None: return
 
-        shuffle(self.model.animals)
+        self.model.animals.sort(key=lambda animal: -animal.pos.y)
         for animal in self.model.animals:
             if (animal.pos.x <= mouse_pos.x and animal.pos.x + Model.ANIMAL_SIZE.x >= mouse_pos.x and animal.pos.y <= mouse_pos.y and animal.pos.y + Model.ANIMAL_SIZE.y >= mouse_pos.y):
                 if self.view.last_edit == "left":
