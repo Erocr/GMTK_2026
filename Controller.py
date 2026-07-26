@@ -86,10 +86,18 @@ class Controller:
 
     def specie_chosen(self, mouse_pos:Vec):
         for spec in self.model.unlocked_species:
-            if spec.pos.x < mouse_pos.x and spec.pos.x + 157 > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + 296> mouse_pos.y:
-                #self.opened_box.fill(spec)
+            if self.opened_box and spec.pos.x < mouse_pos.x and spec.pos.x + 157 > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + 296> mouse_pos.y:
+                self.opened_box.update_spec = spec
                 self.opened_box = None
-                self.model.score += 1
+                for i in range(len(self.tree_window.boxes)):
+                    if self.tree_window.boxes[i].spec ==  spec:
+                        if i%2==0:
+                            s2 = self.tree_window.boxes[i-1]
+                        else:
+                            s2 = self.tree_window.boxes[i+1]
+
+                if self.model.tree.get_direct_ancestor(spec, s2) is not None:
+                    self.model.score += 2
                 
 
     def update(self):

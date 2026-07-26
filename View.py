@@ -152,7 +152,7 @@ class View:
 
     def draw_specie(self,specie):
         for key in specie.list_body_parts.keys():
-            self.draw_image(self.model.get_image(specie.list_body_parts[key].active_sec), specie.pos)
+            self.draw_image(self.model.get_image(specie.list_body_parts[key].active_sec)+'_mini', specie.pos)
 
     def open_list_species(self):
         self.list_species_opened = True
