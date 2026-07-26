@@ -36,7 +36,7 @@ class Model:
         specie = Specie(head, legs, torso, tail, self)
         # ancestor = Animal(Vec(0, 0), specie)
         self.tree = Tree(specie)
-        self.create_children(self.tree, specie, 20)
+        self.create_children(self.tree, specie, 4)
         self.fill_animals()
 
     def update(self):
@@ -110,19 +110,17 @@ class Model:
         if children is None:
             children = [ancestor]
         if etage == 0:
+            print(len(children))
             return children
         else:
             waiting_children = []
             kid1, kid2 = self.create_kid(ancestor)
-            """ for elt in kid1.list_body_parts:
-                print(kid1.list_body_parts[elt].active_sec, kid2.list_body_parts[elt].active_sec)
-            print('\n') """
             tree.add_animal(kid1, ancestor)
             tree.add_animal(kid2, ancestor)
             children.append(kid1)
             children.append(kid2)
             waiting_children.append(kid1)
-            children.append(kid2)
+            waiting_children.append(kid2)
             for kid in waiting_children:
                 self.create_children(tree, kid, etage-1, children)
 
@@ -152,6 +150,7 @@ class Model:
 
     def fill_animals(self):
         last_gen = self.tree.get_last_gen()
+        print(len(last_gen))
         for spec in last_gen:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
