@@ -6,7 +6,7 @@ from random import randint, shuffle
 from Tree import Tree
 from DnaEditor import DnaEditor
 from Dna import Dna
-from Button import DnaEditorButton
+from Button import DnaEditorButton, GenericButton
 
 
 class Controller:
@@ -38,7 +38,14 @@ class Controller:
                     self.buttons_right.append(DnaEditorButton(Vec(300, 160) + Vec(1253, 50), Vec(442,297), self.view.right_dna_editor, animal.list_body_parts["tail"], self.model, 2))
                     self.buttons_right.append(DnaEditorButton(Vec(1253, 50), Vec(245, 297), self.view.right_dna_editor, animal.list_body_parts["head"], self.model, 2))
 
-                
+                    self.view.buttons.append(GenericButton(Vec(1226, 56), Vec(81, 88), "close_window_icon", None))
+                    button = self.view.buttons[-1]
+
+                    def close_window():
+                        self.view.right_dna_editor = None
+                        self.view.buttons.remove(button)
+
+                    button.action_when_clicked = close_window
                 elif self.view.last_edit == "right":
                     self.view.left_dna_editor = DnaEditor(animal, True, None, self.view)
                     self.model.dna_1 = Dna(Vec(325, 600), 600, animal.get_dna())
@@ -49,8 +56,15 @@ class Controller:
                     self.buttons_right.append(DnaEditorButton(Vec(300, 160) + Vec(27, 50), Vec(442,297), self.view.left_dna_editor, animal.list_body_parts["tail"], self.model, 1))
                     self.buttons_right.append(DnaEditorButton(Vec(27, 50), Vec(245, 297), self.view.left_dna_editor, animal.list_body_parts["head"], self.model, 1))
 
+                    self.view.buttons.append(
+                        GenericButton(Vec(0, 56), Vec(81, 88), "close_window_icon", None))
+                    button = self.view.buttons[-1]
 
+                    def close_window():
+                        self.view.left_dna_editor = None
+                        self.view.buttons.remove(button)
 
+                    button.action_when_clicked = close_window
                 break #oui c'est pas bien, mais ça séléctionne un unique animal par clic
 
     
@@ -67,7 +81,14 @@ class Controller:
             for button in self.buttons_right:
                 button.is_clicked(self.inputHandler.mouse_pos)
 
+            for button in self.view.buttons:
+                if button.pos.x <= self.inputHandler.mouse_pos.x <= button.pos.x + button.size.x \
+                        and button.pos.y <= self.inputHandler.mouse_pos.y <= button.pos.y + button.size.y:
+                    button.action_when_clicked()
+
             if self.view.model.dna_1 is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
                 # print(index) ???
+
+
 

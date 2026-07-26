@@ -1,3 +1,5 @@
+from typing import Callable
+
 from Vec import *
 from Dna import Dna
 
@@ -20,3 +22,9 @@ class DnaEditorButton:
                 self.model.dna_2 = Dna(Vec(1550, 600), 600, self.bodypart.getdna())
 
  
+class GenericButton:
+    def __init__(self, pos: Vec, size: Vec, image: str, action_when_clicked: Callable):
+        self.pos = pos
+        self.size = size
+        self.image = image
+        self.action_when_clicked = action_when_clicked

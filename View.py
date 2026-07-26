@@ -1,6 +1,8 @@
 import time
 
 import pygame as pg
+
+from Button import GenericButton
 from Vec import *
 import os
 from Animal import Animal
@@ -35,6 +37,8 @@ class View:
         self.left_dna_editor = None
         self.right_dna_editor = None
         self.last_edit = "right"
+
+        self.buttons: list[GenericButton] = []
 
     def resize(self, screen_size):
         self.screen_size = screen_size
@@ -156,6 +160,9 @@ class View:
             self.left_dna_editor.draw()
         if self.right_dna_editor is not None:
             self.right_dna_editor.draw()
+
+        for button in self.buttons:
+            self.draw_image(button.image, button.pos)
 
         self.flip()
 
