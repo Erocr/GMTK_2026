@@ -14,12 +14,12 @@ class DnaEditor:
         if not self.is_left_col:
             self.view.draw_image("dna_window", Vec(0,0))
             for key in self.view.body_parts_ordered:
-                self.view.draw_image( self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(1320, 50))
+                self.view.draw_image( self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(1253, 50))
 
             self.view.model.dna_2.draw(self.view)
         else :
             self.view.draw_image("dna_window_alone", Vec(0,56))
             for key in self.view.body_parts_ordered:
-                self.view.draw_image( self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(94, 50))
+                self.view.draw_image( self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(27, 50))
 
             self.view.model.dna_1.draw(self.view)

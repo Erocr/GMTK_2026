@@ -32,6 +32,7 @@ class View:
 
         self.left_dna_editor = None
         self.right_dna_editor = None
+        self.last_edit = "right"
 
     def resize(self, screen_size):
         self.screen_size = screen_size
