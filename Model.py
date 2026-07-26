@@ -110,7 +110,6 @@ class Model:
         if children is None:
             children = [ancestor]
         if etage == 0:
-            print(len(children))
             return children
         else:
             waiting_children = []
