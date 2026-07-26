@@ -50,7 +50,7 @@ class Controller:
     def specie_chosen(self, mouse_pos:Vec):
         for spec in self.model.unlocked_species:
             if spec.pos.x < mouse_pos.x and spec.pos.x + 157 > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + 296> mouse_pos.y:
-                self.opened_box.fill(spec)
+                #self.opened_box.fill(spec)
                 self.opened_box = None
                 self.model.score += 1
                 

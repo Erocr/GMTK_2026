@@ -160,11 +160,7 @@ class Model:
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
             # pour afficher les espèces dans la liste de choix de l'arbre généalogique
-            """ for i in range(0,len(self.unlocked_species)//8 + 1):
-                x = 157*(i*8) + 354
-                for j in range(i,i+8):
-                    spec.set_pos(Vec(x,296*j + 134)) """
-            spec.set_pos(Vec(157* (len(self.unlocked_species)//8) + 354, 296*(len(self.unlocked_species)%8) + 134))
+            spec.set_pos(Vec(200* (len(self.unlocked_species)%4) + 200, 157*(len(self.unlocked_species)//4) + 50))
             self.unlocked_species.append(spec)
 
     def update_unlocked_species(self, spec1: Specie, spec2: Specie):
