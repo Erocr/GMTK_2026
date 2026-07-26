@@ -20,6 +20,7 @@ class Model:
         self.dna_image = {}
         self.images = []
         self.unlocked_species = []
+        self.score = 0
         self.dna_set_up()
         self._init()
 

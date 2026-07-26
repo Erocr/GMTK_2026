@@ -15,6 +15,7 @@ class Controller:
         self.view = view
         self.inputHandler = InputHandler(view)
         self.tree_window = TreeWindow(view, "icon_dossier", "arbre_genealogique_v3", "empty_window",Vec(0,0))
+        self.opened_box = None
         view.set_tree_window(self.tree_window)
 
 
@@ -44,10 +45,15 @@ class Controller:
         for box in self.tree_window.boxes:
             if box.pos.x - box.rad < mouse_pos.x and box.pos.x + box.rad > mouse_pos.x and box.pos.y - box.rad < mouse_pos.y and box.pos.y + box.rad > mouse_pos.y:
                 self.view.open_list_species()
+                self.opened_box = box
 
-    def specie_chosen(self, pos:Vec):
-        for specie in self.model.unlocked_species:
-            pass
+    def specie_chosen(self, mouse_pos:Vec):
+        for spec in self.model.unlocked_species:
+            if spec.pos.x < mouse_pos.x and spec.pos.x + 157 > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + 296> mouse_pos.y:
+                self.opened_box.fill(spec)
+                self.opened_box = None
+                self.model.score += 1
+                
 
     def update(self):
         self.inputHandler.update()
