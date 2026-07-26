@@ -160,21 +160,23 @@ class Model:
             self.animals.append(Animal(Vec(x, y), spec))
             # pour afficher les espèces dans la liste de choix de l'arbre généalogique
             for i in range(0,len(self.unlocked_species),8):
-                spec.set_pos(Vec(157*len(self.unlocked_species),0))
+                x = 157*len(self.unlocked_species)
                 for j in range(i,i+8):
-                    spec.set_pos(Vec(0,296*len(self.unlocked_species)))
+                    spec.set_pos(Vec(x, 296*len(self.unlocked_species)))
+                    print(spec.pos)
             self.unlocked_species.append(spec)
 
     def update_unlocked_species(self, spec1: Specie, spec2: Specie):
         """
         Return True if the two species have the same direct ancestor and add it to unlocked and False if they don't have the same direct ancestor
         """
-        ancestor = self.tree.get_direct_ancestor(spec1, spec2)
+        ancestor : Specie = self.tree.get_direct_ancestor(spec1, spec2)
         if ancestor : 
             for i in range(0,len(self.unlocked_species),8):
                 ancestor.set_pos(Vec(157*len(self.unlocked_species),0))
                 for j in range(i,i+8):
                     ancestor.set_pos(Vec(0,296*len(self.unlocked_species)))
+                    print(ancestor.pos)
             self.unlocked_species.append(ancestor)
             return True
         else : return False
