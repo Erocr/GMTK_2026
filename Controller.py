@@ -14,7 +14,7 @@ class Controller:
         self.model = model
         self.view = view
         self.inputHandler = InputHandler(view)
-        self.tree_window = TreeWindow(view, "ciseaux_ferme", "ciseaux_ouvert", Vec(0,0))
+        self.tree_window = TreeWindow(view, "arbre_genealogique_v3", "icon_dossier", Vec(0,0))
         view.set_tree_window(self.tree_window)
 
 
