@@ -190,6 +190,11 @@ class View:
 
         self.flip()
 
+    def draw_titlescreen(self):
+        self.draw_image("titlescreen", Vec(0, 0))
+        self.draw_image("startbutton_alone", Vec(165, 530))
+        pg.display.flip()
+
     def flip(self):
         pg.display.flip()
         self.draw_image("background_terrarium_v1", Vec(0, 0))
