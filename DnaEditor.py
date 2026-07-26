@@ -30,3 +30,20 @@ class DnaEditor:
                     self.view.draw_image(self.view.model.get_image(self.animal.specie.list_body_parts[key].active_sec), Vec(50, 150))
 
             self.view.model.dna_1.draw(self.view)
+
+    def is_good_selected_part(self):
+        if self.selected_body_part is None:
+            return False
+
+    def modify_dna(self, index_dna_cutted):
+        if self.selected_body_part is None or index_dna_cutted is None:
+            return
+
+        dna_cutted = self.selected_body_part.dna_sec[index_dna_cutted * 8: index_dna_cutted * 8 + 8]
+        print(dna_cutted)
+        if self.selected_body_part.active_sec == dna_cutted:
+            self.animal.specie = self.view.model.tree.direct_ancestors[self.animal.specie]
+            self.view.get_button(f"close_{("right", "left")[self.is_left_col]}_window").action_when_clicked()
+        else:
+            print("le joueur s'est trompé")
+
