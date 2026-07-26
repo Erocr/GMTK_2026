@@ -34,7 +34,7 @@ class Model:
         tail = BodyPart(self.get_random_seq("tail"))
 
         # create animals
-        specie = Specie(head, torso, legs, tail, self)
+        specie = Specie(head, legs, torso, tail, self)
         # ancestor = Animal(Vec(0, 0), specie)
         self.tree = Tree(specie)
         self.create_children(self.tree, specie, 20)
