@@ -18,11 +18,12 @@ class Box:
         self.spec = new_spec
 
     def draw(self):
+        print(self.spec)
         if self.spec:
-            for body_part in self.spec:
+            for body_part in self.spec.list_body_parts:
                 dna_to_draw = self.spec.list_body_parts[body_part].active_sec
-                image = self.view.draw_image[dna_to_draw] + "_mini"
-                self.view.draw_image(image, self.pos)
+                image = self.view.model.dna_image[dna_to_draw]
+                self.view.draw_image(image+'_mini', self.pos - self.view.model.ANIMAL_IN_GRAPH_SIZE/2)
 
     def fill(self,specie):
         pass

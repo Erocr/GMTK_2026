@@ -88,7 +88,7 @@ class Controller:
         for spec in self.model.unlocked_species:
             s2 = None
             if self.opened_box and spec.pos.x < mouse_pos.x and spec.pos.x + self.model.ANIMAL_IN_GRAPH_SIZE.x > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + self.model.ANIMAL_IN_GRAPH_SIZE.y > mouse_pos.y:
-                self.opened_box.update_spec = spec
+                self.opened_box.update_spec(spec)
                 self.opened_box = None
                 self.view.list_species_opened = False
                 s2 = None
