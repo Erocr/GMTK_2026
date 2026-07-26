@@ -35,6 +35,7 @@ class View:
         self.left_dna_editor = None
         self.right_dna_editor = None
         self.tree_window = None
+        self.list_species_opened = False
 
 
     def set_tree_window(self, tree_window):
@@ -139,6 +140,9 @@ class View:
         else:
             pass
 
+    def open_list_species(self):
+        self.list_species_opened = True
+
     def draw_text(self, pos, text, color=(0, 0, 0)):
         pos *= self.screen_ratio
         text_im = self.font.render(text, True, color)
@@ -161,6 +165,8 @@ class View:
             self.right_dna_editor.draw()
         assert self.tree_window is not None
         self.tree_window.draw()
+        if self.list_species_opened:
+            self.draw_image("empty_window",Vec(0,0))
 
         self.flip()
 

@@ -158,6 +158,8 @@ class Model:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
+            # pour afficher les espèces dans la liste de choix de l'arbre généalogique
+            spec.set_pos(39*len(self.unlocked_species)+Vec(339,101))
             self.unlocked_species.append(spec)
 
     def update_unlocked_species(self, spec1: Specie, spec2: Specie):
@@ -166,6 +168,7 @@ class Model:
         """
         ancestor = self.tree.get_direct_ancestor(spec1, spec2)
         if ancestor : 
+            ancestor.set_pos(len(self.unlocked_species)*self.ANIMAL_SIZE+22)
             self.unlocked_species.append(ancestor)
             return True
         else : return False

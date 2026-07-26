@@ -43,7 +43,11 @@ class Controller:
     def box_clicked(self, mouse_pos:Vec):
         for box in self.tree_window.boxes:
             if box.pos.x - box.rad < mouse_pos.x and box.pos.x + box.rad > mouse_pos.x and box.pos.y - box.rad < mouse_pos.y and box.pos.y + box.rad > mouse_pos.y:
-                self.view.list_species.open()
+                self.view.open_list_species()
+
+    def specie_chosen(self):
+        for specie in self.model.unlocked_species:
+            pass
 
     def update(self):
         self.inputHandler.update()
@@ -55,6 +59,8 @@ class Controller:
                 self.search_animal(self.inputHandler.mouse_pos)
             if self.tree_window.opened:
                 self.box_clicked(self.inputHandler.mouse_pos)
+            if self.view.list_species_opened:
+                self.specie_chosen(self.inputHandler.mouse_pos)
             if self.view.model.dna_1 is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
                 # print(index) ???

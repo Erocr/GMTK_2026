@@ -1,16 +1,18 @@
 import random
 import time
 from BodyPart import BodyPart
+from Vec import Vec
 
 
 
 class Specie:
     last_id = 0
 
-    def __init__(self, head: BodyPart, legs: BodyPart, torso: BodyPart, tail: BodyPart, model):
+    def __init__(self, head: BodyPart, legs: BodyPart, torso: BodyPart, tail: BodyPart, model, pos:Vec = Vec(0,0)):
         self.id = self.last_id + 1
         Specie.last_id += 1
         self.list_body_parts = {"head": head, "legs": legs, "torso": torso, "tail": tail}
+        self.pos = pos
         self.model = model
 
     def __hash__(self):
@@ -37,3 +39,6 @@ class Specie:
         for body_part in self.list_body_parts:
             dna += self.list_body_parts[body_part].dna_sec
         return dna
+
+    def set_pos(self, pos:Vec):
+        self.pos = pos
