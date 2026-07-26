@@ -140,7 +140,7 @@ class View:
                 if key == "legs" and animal.is_moving():
                     anim_i = (time.time() - animal.startMovementTime) / animal.LEG_ANIM_FRAME_DURATION
                     anim_i = int(anim_i)
-                    anim_i = anim_i % 13
+                    anim_i = anim_i % 14
                     anim = self.model.get_image(animal.list_body_parts[key].active_sec)
                     if anim[:4] != "legs":
                         continue
@@ -193,3 +193,15 @@ class View:
     def flip(self):
         pg.display.flip()
         self.draw_image("background_terrarium_v1", Vec(0, 0))
+
+    def get_button(self, name):
+        for button in self.buttons:
+            if button.name == name:
+                return button
+
+    def add_button(self, button):
+        if button.name in [b.name for b in self.buttons]:
+            for i in reversed(range(len(self.buttons))):
+                if self.buttons[i].name == button.name:
+                    self.buttons.pop(i)
+        self.buttons.append(button)

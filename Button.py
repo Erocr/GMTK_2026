@@ -23,8 +23,9 @@ class DnaEditorButton:
 
  
 class GenericButton:
-    def __init__(self, pos: Vec, size: Vec, image: str, action_when_clicked: Callable):
+    def __init__(self, pos: Vec, size: Vec, image: str, action_when_clicked: Callable, name=""):
         self.pos = pos
         self.size = size
         self.image = image
         self.action_when_clicked = action_when_clicked
+        self.name = name
