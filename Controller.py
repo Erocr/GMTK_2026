@@ -1,6 +1,7 @@
 
 from InputHandler import InputHandler, Key
 from Model import Model
+from TreeWindow import TreeWindow
 from Vec import Vec
 from random import randint, shuffle
 from Tree import Tree
@@ -14,6 +15,9 @@ class Controller:
         self.model = model
         self.view = view
         self.inputHandler = InputHandler(view)
+        self.tree_window = TreeWindow(view, "icon_dossier", "arbre_genealogique_v3", "empty_window",Vec(0,0))
+        self.opened_box = None
+        view.set_tree_window(self.tree_window)
         self.buttons_right = []
         self.buttons_left = []
 
@@ -68,13 +72,38 @@ class Controller:
                 break #oui c'est pas bien, mais ça séléctionne un unique animal par clic
 
     
+    def tree_window_clicked(self, mouse_pos : Vec):
+        if self.tree_window.pos.x<mouse_pos.x and self.tree_window.pos.x + self.tree_window.width > mouse_pos.x and self.tree_window.pos.y<mouse_pos.y and self.tree_window.pos.y + self.tree_window.height > mouse_pos.y:
+            self.tree_window.opened = not self.tree_window.opened
+            return True
+        return False
+
+    def box_clicked(self, mouse_pos:Vec):
+        for box in self.tree_window.boxes:
+            if box.pos.x - box.rad < mouse_pos.x and box.pos.x + box.rad > mouse_pos.x and box.pos.y - box.rad < mouse_pos.y and box.pos.y + box.rad > mouse_pos.y:
+                self.view.open_list_species()
+                self.opened_box = box
+
+    def specie_chosen(self, mouse_pos:Vec):
+        for spec in self.model.unlocked_species:
+            if spec.pos.x < mouse_pos.x and spec.pos.x + 157 > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + 296> mouse_pos.y:
+                #self.opened_box.fill(spec)
+                self.opened_box = None
+                self.model.score += 1
+                
+
     def update(self):
         self.inputHandler.update()
         if self.inputHandler.resized is not None:
             self.view.resize(self.inputHandler.resized)
         
         if self.inputHandler.pressed("mouse_left"):
-            self.search_animal(self.inputHandler.mouse_pos)
+            if not self.tree_window_clicked(self.inputHandler.mouse_pos):
+                self.search_animal(self.inputHandler.mouse_pos)
+            if self.tree_window.opened:
+                self.box_clicked(self.inputHandler.mouse_pos)
+            if self.view.list_species_opened:
+                self.specie_chosen(self.inputHandler.mouse_pos)
 
             for button in self.buttons_left:
                 button.is_clicked(self.inputHandler.mouse_pos)
@@ -89,6 +118,7 @@ class Controller:
             if self.view.model.dna_1 is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
                 # print(index) ???
-
+            if self.model.score == 32:
+                self.view.draw_image("win_pop_up")
 
 

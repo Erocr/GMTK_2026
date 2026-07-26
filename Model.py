@@ -21,6 +21,8 @@ class Model:
         self.animals : list[Animal] = []
         self.dna_image = {}
         self.images = []
+        self.unlocked_species = []
+        self.score = 0
         self.dna_set_up()
         self._init()
 
@@ -156,3 +158,20 @@ class Model:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
+            # pour afficher les espèces dans la liste de choix de l'arbre généalogique
+            spec.set_pos(Vec(200* (len(self.unlocked_species)%4) + 200, 157*(len(self.unlocked_species)//4) + 50))
+            self.unlocked_species.append(spec)
+
+    def update_unlocked_species(self, spec1: Specie, spec2: Specie):
+        """
+        Return True if the two species have the same direct ancestor and add it to unlocked and False if they don't have the same direct ancestor
+        """
+        ancestor : Specie = self.tree.get_direct_ancestor(spec1, spec2)
+        if ancestor : 
+            for i in range(0,len(self.unlocked_species),8):
+                x = 157*i + 157
+                for j in range(i,i+8):
+                    ancestor.set_pos(Vec(x ,296*j + 134))
+            self.unlocked_species.append(ancestor)
+            return True
+        else : return False

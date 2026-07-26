@@ -39,6 +39,13 @@ class View:
         self.last_edit = "right"
 
         self.buttons: list[GenericButton] = []
+        self.tree_window = None
+        self.list_species_opened = False
+
+
+    def set_tree_window(self, tree_window):
+        self.tree_window = tree_window
+        
 
     def resize(self, screen_size):
         self.screen_size = screen_size
@@ -143,6 +150,13 @@ class View:
         else:
             pass
 
+    def draw_specie(self,specie):
+        for key in specie.list_body_parts.keys():
+            self.draw_image(self.model.get_image(specie.list_body_parts[key].active_sec), specie.pos)
+
+    def open_list_species(self):
+        self.list_species_opened = True
+
     def draw_text(self, pos, text, color=(0, 0, 0)):
         pos *= self.screen_ratio
         text_im = self.font.render(text, True, color)
@@ -163,6 +177,13 @@ class View:
             self.left_dna_editor.draw()
         if self.right_dna_editor is not None:
             self.right_dna_editor.draw()
+        assert self.tree_window is not None
+        self.tree_window.draw()
+        if self.list_species_opened:
+            self.draw_image("empty_window",Vec(0,0))
+            for specie in self.model.unlocked_species:
+                self.draw_specie(specie)
+                print(specie.pos)
 
         for button in self.buttons:
             self.draw_image(button.image, button.pos)
