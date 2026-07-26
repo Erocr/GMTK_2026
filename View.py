@@ -152,7 +152,7 @@ class View:
 
     def draw_specie(self,specie):
         for key in specie.list_body_parts.keys():
-            self.draw_image(self.model.get_image(specie.list_body_parts[key].active_sec), specie.pos)
+            self.draw_image(self.model.get_image(specie.list_body_parts[key].active_sec)+'_mini', specie.pos)
 
     def open_list_species(self):
         self.list_species_opened = True
@@ -183,12 +183,16 @@ class View:
             self.draw_image("empty_window",Vec(0,0))
             for specie in self.model.unlocked_species:
                 self.draw_specie(specie)
-                print(specie.pos)
 
         for button in self.buttons:
             self.draw_image(button.image, button.pos)
 
         self.flip()
+
+    def draw_titlescreen(self):
+        self.draw_image("titlescreen", Vec(0, 0))
+        self.draw_image("startbutton_alone", Vec(165, 530))
+        pg.display.flip()
 
     def flip(self):
         pg.display.flip()

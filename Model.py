@@ -153,13 +153,12 @@ class Model:
 
     def fill_animals(self):
         last_gen = self.tree.get_last_gen()
-        print(len(last_gen))
         for spec in last_gen:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
             # pour afficher les espèces dans la liste de choix de l'arbre généalogique
-            spec.set_pos(Vec(200* (len(self.unlocked_species)%4) + 200, 157*(len(self.unlocked_species)//4) + 50))
+            spec.set_pos(Vec(self.ANIMAL_IN_GRAPH_SIZE.x* (len(self.unlocked_species)%8) + 300, self.ANIMAL_IN_GRAPH_SIZE.y*(len(self.unlocked_species)//8) + 100))
             self.unlocked_species.append(spec)
 
     def update_unlocked_species(self, spec1: Specie, spec2: Specie):
@@ -168,10 +167,7 @@ class Model:
         """
         ancestor : Specie = self.tree.get_direct_ancestor(spec1, spec2)
         if ancestor : 
-            for i in range(0,len(self.unlocked_species),8):
-                x = 157*i + 157
-                for j in range(i,i+8):
-                    ancestor.set_pos(Vec(x ,296*j + 134))
+            ancestor.set_pos(Vec(200* (len(self.unlocked_species)%4) + 200, 157*(len(self.unlocked_species)//4) + 50))
             self.unlocked_species.append(ancestor)
             return True
         else : return False

@@ -86,10 +86,21 @@ class Controller:
 
     def specie_chosen(self, mouse_pos:Vec):
         for spec in self.model.unlocked_species:
-            if spec.pos.x < mouse_pos.x and spec.pos.x + 157 > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + 296> mouse_pos.y:
-                #self.opened_box.fill(spec)
+            s2 = None
+            if self.opened_box and spec.pos.x < mouse_pos.x and spec.pos.x + self.model.ANIMAL_IN_GRAPH_SIZE.x > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + self.model.ANIMAL_IN_GRAPH_SIZE.y > mouse_pos.y:
+                self.opened_box.update_spec(spec)
                 self.opened_box = None
-                self.model.score += 1
+                self.view.list_species_opened = False
+                """  s2 = None
+                for i in range(len(self.tree_window.boxes)):
+                    if self.tree_window.boxes[i].spec and self.tree_window.boxes[i].spec ==  spec:
+                        if i%2==0:
+                            s2 = self.tree_window.boxes[i-1]
+                        else:
+                            s2 = self.tree_window.boxes[i+1]
+
+                if s2 and self.model.tree.get_direct_ancestor(spec, s2) is not None:
+                    self.model.score += 2 """
                 
 
     def update(self):
@@ -98,12 +109,12 @@ class Controller:
             self.view.resize(self.inputHandler.resized)
         
         if self.inputHandler.pressed("mouse_left"):
-            if not self.tree_window_clicked(self.inputHandler.mouse_pos):
-                self.search_animal(self.inputHandler.mouse_pos)
-            if self.tree_window.opened:
-                self.box_clicked(self.inputHandler.mouse_pos)
             if self.view.list_species_opened:
                 self.specie_chosen(self.inputHandler.mouse_pos)
+            if self.tree_window.opened:
+                self.box_clicked(self.inputHandler.mouse_pos)
+            if not self.tree_window_clicked(self.inputHandler.mouse_pos):
+                self.search_animal(self.inputHandler.mouse_pos)
 
             for button in self.buttons_left:
                 button.is_clicked(self.inputHandler.mouse_pos)
@@ -117,8 +128,8 @@ class Controller:
 
             if self.view.model.dna_1 is not None and self.view.left_dna_editor is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
+                self.view.left_dna_editor.modify_dna(index)
 
-                # print(index) ???
             if self.model.score == 32:
                 self.view.draw_image("win_pop_up")
                 self.view.left_dna_editor.modify_dna(index)
