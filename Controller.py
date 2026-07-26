@@ -129,7 +129,6 @@ class Controller:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
                 self.view.left_dna_editor.modify_dna(index)
 
-                # print(index) ???
             if self.model.score == 32:
                 self.view.draw_image("win_pop_up")
                 self.view.left_dna_editor.modify_dna(index)
