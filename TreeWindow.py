@@ -17,8 +17,8 @@ class TreeWindow:
                       Box(Vec(875,1088),90,view)]
         self.opened = False
         self.pos = pos
-        self.width = 50 #width of the folder icon
-        self.height = 50 #height of the folder icon
+        self.width = 187 #width of the folder icon
+        self.height = 193 #height of the folder icon
 
     def draw(self):
         if self.opened:
