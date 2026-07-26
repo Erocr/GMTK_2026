@@ -31,4 +31,7 @@ class TreeWindow:
     def draw(self):
         if self.opened:
             self.view.draw_image(self.img_opened, self.pos)
+            for boxes in self.boxes:
+                print('a')
+                boxes.draw()
         self.view.draw_image(self.img_closed, self.pos) # the folder is always showed
