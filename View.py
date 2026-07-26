@@ -8,7 +8,7 @@ from Model import Model
 
 
 class View:
-    def __init__(self, model : Model):
+    def __init__(self, model: Model):
         self.model = model
 
         self.screen_size_full = Vec(1920, 1280)
@@ -53,6 +53,8 @@ class View:
             if self.is_animal_image(image_name):
                 screen_ratio *= Model.ANIMAL_SIZE_RATIO
             self.images[image_name] = pg.transform.scale_by(self.images_full[image_name], screen_ratio.get()).convert_alpha()
+
+            self.images[image_name+"_mini"] = pg.transform.scale_by(self.images_full[image_name], (self.screen_ratio * Model.ANIMAL_IN_GRAPH_SIZE_RATIO).get()).convert_alpha()
 
         for body_part in self.body_parts_ordered:
             for i in range(5):

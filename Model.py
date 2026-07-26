@@ -10,7 +10,9 @@ from itertools import combinations
 class Model:
     SCREEN_SIZE = Vec(1920, 1280)
     ANIMAL_SIZE_RATIO = 0.6
+    ANIMAL_IN_GRAPH_SIZE_RATIO = 0.2
     ANIMAL_SIZE = Vec(743, 458) * ANIMAL_SIZE_RATIO
+    ANIMAL_IN_GRAPH_SIZE = Vec(743, 458) * ANIMAL_IN_GRAPH_SIZE_RATIO
 
     def __init__(self):
         self.SCREEN_LENGTH = 1280
