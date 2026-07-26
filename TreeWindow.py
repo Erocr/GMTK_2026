@@ -4,10 +4,12 @@ from Vec import Vec
 
 class TreeWindow:
 
-    def __init__(self, view: View, img_closed:str, img_opened:str, pos:Vec):
+    def __init__(self, view: View, img_closed:str, img_opened:str, img_list_empty:str, pos:Vec):
         self.view = view
         self.img_closed = img_closed
         self.img_opened = img_opened
+        self.img_list_empty = img_list_empty
+        self.boxes = []
         self.opened = False
         self.pos = pos
         self.width = 50 #width of the folder icon
