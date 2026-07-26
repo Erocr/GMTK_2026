@@ -31,18 +31,24 @@ class DnaEditor:
 
             self.view.model.dna_1.draw(self.view)
 
+    def get_animal_ancestor(self):
+        return self.view.model.tree.direct_ancestors[self.animal.specie]
+
     def is_good_selected_part(self):
         if self.selected_body_part is None:
             return False
+        selected_body_part = self.view.model.get_image(self.selected_body_part.active_sec)[:-2]
+        ancestor_body_part = self.get_animal_ancestor().list_body_parts[selected_body_part]
+        return ancestor_body_part.dna_sec != self.selected_body_part.dna_sec
 
     def modify_dna(self, index_dna_cutted):
-        if self.selected_body_part is None or index_dna_cutted is None:
+        if index_dna_cutted is None or not self.is_good_selected_part():
             return
 
         dna_cutted = self.selected_body_part.dna_sec[index_dna_cutted * 8: index_dna_cutted * 8 + 8]
         print(dna_cutted)
         if self.selected_body_part.active_sec == dna_cutted:
-            self.animal.specie = self.view.model.tree.direct_ancestors[self.animal.specie]
+            self.animal.specie = self.get_animal_ancestor()
             self.view.get_button(f"close_{("right", "left")[self.is_left_col]}_window").action_when_clicked()
         else:
             print("le joueur s'est trompé")
