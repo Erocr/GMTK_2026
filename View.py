@@ -173,6 +173,7 @@ class View:
             self.draw_image("empty_window",Vec(0,0))
             for specie in self.model.unlocked_species:
                 self.draw_specie(specie)
+                print(specie.pos)
 
         self.flip()
 
