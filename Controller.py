@@ -14,7 +14,7 @@ class Controller:
         self.model = model
         self.view = view
         self.inputHandler = InputHandler(view)
-        self.tree_window = TreeWindow(view, "ciseaux_ferme", "ciseaux_ouvert")
+        self.tree_window = TreeWindow(view, "ciseaux_ferme", "ciseaux_ouvert", Vec(0,0))
         view.set_tree_window(self.tree_window)
 
 
@@ -34,13 +34,20 @@ class Controller:
 
                 break #oui c'est pas bien, mais ça séléctionne un unique animal par clic
 
+    def tree_window_clicked(self, mouse_pos : Vec):
+        if self.tree_window.pos.x<mouse_pos.x and self.tree_window.pos.x + self.tree_window.width > mouse_pos.x and self.tree_window.pos.y<mouse_pos.y and self.tree_window.pos.y + self.tree_window.height > mouse_pos.y:
+            self.tree_window.opened = not self.tree_window.opened
+            return True
+        return False
+
     def update(self):
         self.inputHandler.update()
         if self.inputHandler.resized is not None:
             self.view.resize(self.inputHandler.resized)
         
         if self.inputHandler.pressed("mouse_left"):
-            self.search_animal(self.inputHandler.mouse_pos)
+            if not self.tree_window_clicked(self.inputHandler.mouse_pos):
+                self.search_animal(self.inputHandler.mouse_pos)
             if self.view.model.dna_1 is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
                 # print(index) ???
