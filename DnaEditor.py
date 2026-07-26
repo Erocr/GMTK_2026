@@ -48,5 +48,6 @@ class DnaEditor:
         dna_cutted = self.selected_body_part.dna_sec[index_dna_cutted * 8: index_dna_cutted * 8 + 8]
         if self.selected_body_part.active_sec == dna_cutted:
             self.animal.specie = self.get_animal_ancestor()
-            self.view.get_button(f"close_{("right", "left")[self.is_left_col]}_window").action_when_clicked()
+            a = ("right", "left")[self.is_left_col]
+            self.view.get_button(f"close_{a}_window").action_when_clicked()
 
