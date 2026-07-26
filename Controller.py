@@ -70,4 +70,6 @@ class Controller:
             if self.view.model.dna_1 is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
                 # print(index) ???
+            if self.model.score == 32:
+                self.view.draw_image("win_pop_up")
 
