@@ -10,13 +10,15 @@ from itertools import combinations
 class Model:
     SCREEN_SIZE = Vec(1920, 1280)
     ANIMAL_SIZE_RATIO = 0.6
+    ANIMAL_IN_GRAPH_SIZE_RATIO = 0.2
     ANIMAL_SIZE = Vec(743, 458) * ANIMAL_SIZE_RATIO
+    ANIMAL_IN_GRAPH_SIZE = Vec(743, 458) * ANIMAL_IN_GRAPH_SIZE_RATIO
 
     def __init__(self):
         self.SCREEN_LENGTH = 1280
         self.SCREEN_WIDTH = 1920
         self.tree = None
-        self.animals = []
+        self.animals : list[Animal] = []
         self.dna_image = {}
         self.images = []
         self.unlocked_species = []
@@ -38,7 +40,7 @@ class Model:
         specie = Specie(head, legs, torso, tail, self)
         # ancestor = Animal(Vec(0, 0), specie)
         self.tree = Tree(specie)
-        self.create_children(self.tree, specie, 20)
+        self.create_children(self.tree, specie, 4)
         self.fill_animals()
 
     def update(self):
@@ -97,16 +99,15 @@ class Model:
 
         #Take all the dna sequences linked to the body part
         dna = []
-        dict = self.get_dna_image()
-        for elt in dict:
+        for elt in self.dna_image:
             #Récupération de la string
             p = ""
-            for char in dict[elt]:
-                if char == '_': break
-                else: p += char
+            for charact in self.dna_image[elt]:
+                if charact == '_': break
+                else: p += charact
             #add if it's the good part
-            if p == part : dna.append(elt)
-        a = dna[randint(0, len(dna)-1)]
+            if p == part : 
+                dna.append(elt)
         return dna[randint(0, len(dna)-1)]
 
     def create_children(self, tree:Tree, ancestor, etage, children = None):
@@ -117,15 +118,12 @@ class Model:
         else:
             waiting_children = []
             kid1, kid2 = self.create_kid(ancestor)
-            """ for elt in kid1.list_body_parts:
-                print(kid1.list_body_parts[elt].active_sec, kid2.list_body_parts[elt].active_sec)
-            print('\n') """
             tree.add_animal(kid1, ancestor)
             tree.add_animal(kid2, ancestor)
             children.append(kid1)
             children.append(kid2)
             waiting_children.append(kid1)
-            children.append(kid2)
+            waiting_children.append(kid2)
             for kid in waiting_children:
                 self.create_children(tree, kid, etage-1, children)
 
@@ -155,16 +153,13 @@ class Model:
 
     def fill_animals(self):
         last_gen = self.tree.get_last_gen()
+        print(len(last_gen))
         for spec in last_gen:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
             # pour afficher les espèces dans la liste de choix de l'arbre généalogique
-            """ for i in range(0,len(self.unlocked_species)//8 + 1):
-                x = 157*(i*8) + 354
-                for j in range(i,i+8):
-                    spec.set_pos(Vec(x,296*j + 134)) """
-            spec.set_pos(Vec(157* (len(self.unlocked_species)//8) + 354, 296*(len(self.unlocked_species)%8) + 134))
+            spec.set_pos(Vec(100* (len(self.unlocked_species)%8) + 300, 100*(len(self.unlocked_species)//8) + 100))
             self.unlocked_species.append(spec)
 
     def update_unlocked_species(self, spec1: Specie, spec2: Specie):
@@ -173,10 +168,7 @@ class Model:
         """
         ancestor : Specie = self.tree.get_direct_ancestor(spec1, spec2)
         if ancestor : 
-            for i in range(0,len(self.unlocked_species),8):
-                x = 157*i + 157
-                for j in range(i,i+8):
-                    ancestor.set_pos(Vec(x ,296*j + 134))
+            ancestor.set_pos(Vec(200* (len(self.unlocked_species)%4) + 200, 157*(len(self.unlocked_species)//4) + 50))
             self.unlocked_species.append(ancestor)
             return True
         else : return False
