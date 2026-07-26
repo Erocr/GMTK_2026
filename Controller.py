@@ -45,7 +45,7 @@ class Controller:
             if box.pos.x - box.rad < mouse_pos.x and box.pos.x + box.rad > mouse_pos.x and box.pos.y - box.rad < mouse_pos.y and box.pos.y + box.rad > mouse_pos.y:
                 self.view.open_list_species()
 
-    def specie_chosen(self):
+    def specie_chosen(self, pos:Vec):
         for specie in self.model.unlocked_species:
             pass
 
