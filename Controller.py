@@ -33,10 +33,10 @@ class Controller:
                     self.model.dna_2 = Dna(Vec(1550, 600), 600, animal.get_dna())
                     self.view.last_edit = "right"
 
-                    self.buttons_right.append(DnaEditorButton(Vec(148, 185) + Vec(1253, 50), Vec(204,170), self.view.right_dna_editor, animal.list_body_parts["torso"], self.model, 2))
-                    self.buttons_right.append(DnaEditorButton(Vec(1338, 348), Vec(253, 118), self.view.right_dna_editor, animal.list_body_parts["legs"], self.model, 2))
-                    self.buttons_right.append(DnaEditorButton(Vec(300, 160) + Vec(1253, 50), Vec(442,297), self.view.right_dna_editor, animal.list_body_parts["tail"], self.model, 2))
-                    self.buttons_right.append(DnaEditorButton(Vec(1253, 50), Vec(245, 297), self.view.right_dna_editor, animal.list_body_parts["head"], self.model, 2))
+                    self.buttons_right.append(DnaEditorButton(Vec(168, 285) + Vec(1253, 50), Vec(204,170), self.view.right_dna_editor, animal.list_body_parts["torso"], self.model, 2))
+                    self.buttons_right.append(DnaEditorButton(Vec(1358, 448), Vec(253, 118), self.view.right_dna_editor, animal.list_body_parts["legs"], self.model, 2))
+                    self.buttons_right.append(DnaEditorButton(Vec(320, 260) + Vec(1253, 50), Vec(442,297), self.view.right_dna_editor, animal.list_body_parts["tail"], self.model, 2))
+                    self.buttons_right.append(DnaEditorButton(Vec(1273, 150), Vec(245, 297), self.view.right_dna_editor, animal.list_body_parts["head"], self.model, 2))
 
                     self.view.buttons.append(GenericButton(Vec(1226, 56), Vec(81, 88), "close_window_icon", None))
                     button = self.view.buttons[-1]

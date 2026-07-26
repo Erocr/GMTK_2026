@@ -102,6 +102,9 @@ class View:
     def draw_image(self, image_name: str, pos):
         self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get())
 
+    def draw_image_with_effect(self, image_name: str, pos):
+        self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get(), special_flags=pg.BLEND_ADD)
+
     def draw_anim(self, anim, index, pos):
         self.screen.blit(self.animations[anim][index], (pos*self.screen_ratio).get())
 

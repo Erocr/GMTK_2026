@@ -15,12 +15,18 @@ class DnaEditor:
         if not self.is_left_col:
             self.view.draw_image("dna_window", Vec(0,0))
             for key in self.view.body_parts_ordered:
-                self.view.draw_image( self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(1276, 150))
+                if self.selected_body_part is not None and self.animal.specie.list_body_parts[key] != self.selected_body_part:
+                    self.view.draw_image_with_effect(self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(1276, 150))
+                else:
+                    self.view.draw_image(self.view.model.get_image(self.animal.specie.list_body_parts[key].active_sec), Vec(1276, 150))
 
             self.view.model.dna_2.draw(self.view)
         else:
             self.view.draw_image("dna_window_alone", Vec(0,56))
             for key in self.view.body_parts_ordered:
-                self.view.draw_image( self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(50, 150))
+                if self.selected_body_part is not None and self.animal.specie.list_body_parts[key] != self.selected_body_part:
+                    self.view.draw_image_with_effect(self.view.model.get_image( self.animal.specie.list_body_parts[key].active_sec) , Vec(50, 150))
+                else:
+                    self.view.draw_image(self.view.model.get_image(self.animal.specie.list_body_parts[key].active_sec), Vec(50, 150))
 
             self.view.model.dna_1.draw(self.view)
