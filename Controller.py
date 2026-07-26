@@ -90,6 +90,7 @@ class Controller:
             if self.opened_box and spec.pos.x < mouse_pos.x and spec.pos.x + self.model.ANIMAL_IN_GRAPH_SIZE.x > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + self.model.ANIMAL_IN_GRAPH_SIZE.y > mouse_pos.y:
                 self.opened_box.update_spec = spec
                 self.opened_box = None
+                s2 = None
                 for i in range(len(self.tree_window.boxes)):
                     if self.tree_window.boxes[i].spec and self.tree_window.boxes[i].spec ==  spec:
                         if i%2==0:
@@ -128,8 +129,8 @@ class Controller:
 
             if self.view.model.dna_1 is not None and self.view.left_dna_editor is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
+                self.view.left_dna_editor.modify_dna(index)
 
-                # print(index) ???
             if self.model.score == 32:
                 self.view.draw_image("win_pop_up")
                 self.view.left_dna_editor.modify_dna(index)
