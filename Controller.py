@@ -38,7 +38,7 @@ class Controller:
                     self.buttons_right.append(DnaEditorButton(Vec(1465, 160), Vec(300,297), self.view.right_dna_editor, animal.list_body_parts["tail"], self.model, 2))
                     self.buttons_right.append(DnaEditorButton(Vec(1240, 50), Vec(145, 297), self.view.right_dna_editor, animal.list_body_parts["head"], self.model, 2))
 
-                    self.view.buttons.append(GenericButton(Vec(1226, 56), Vec(81, 88), "close_window_icon", None, "close_right_window"))
+                    self.view.add_button(GenericButton(Vec(1226, 56), Vec(81, 88), "close_window_icon", None, "close_right_window"))
                     button = self.view.buttons[-1]
 
                     def close_window():
@@ -56,7 +56,7 @@ class Controller:
                     self.buttons_right.append(DnaEditorButton(Vec(225, 160), Vec(300,297), self.view.left_dna_editor, animal.list_body_parts["tail"], self.model, 1))
                     self.buttons_right.append(DnaEditorButton(Vec(30, 50), Vec(145, 297), self.view.left_dna_editor, animal.list_body_parts["head"], self.model, 1))
 
-                    self.view.buttons.append(
+                    self.view.add_button(
                         GenericButton(Vec(0, 56), Vec(81, 88), "close_window_icon", None, name="close_left_window"))
                     button = self.view.buttons[-1]
 

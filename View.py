@@ -177,3 +177,10 @@ class View:
         for button in self.buttons:
             if button.name == name:
                 return button
+
+    def add_button(self, button):
+        if button.name in [b.name for b in self.buttons]:
+            for i in reversed(range(len(self.buttons))):
+                if self.buttons[i].name == button.name:
+                    self.buttons.pop(i)
+        self.buttons.append(button)
