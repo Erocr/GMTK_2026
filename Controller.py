@@ -1,6 +1,7 @@
 
 from InputHandler import InputHandler, Key
 from Model import Model
+from TreeWindow import TreeWindow
 from Vec import Vec
 from random import randint
 from Tree import Tree
@@ -13,6 +14,9 @@ class Controller:
         self.model = model
         self.view = view
         self.inputHandler = InputHandler(view)
+        self.tree_window = TreeWindow(view, "ciseaux_ferme", "ciseaux_ouvert")
+        view.set_tree_window(self.tree_window)
+
 
     @property
     def quit(self):

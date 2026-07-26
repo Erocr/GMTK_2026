@@ -34,6 +34,11 @@ class View:
 
         self.left_dna_editor = None
         self.right_dna_editor = None
+        self.tree_window = None
+
+
+    def set_tree_window(self, tree_window):
+        self.tree_window = tree_window
         
 
     def resize(self, screen_size):
@@ -154,6 +159,7 @@ class View:
             self.left_dna_editor.draw()
         if self.right_dna_editor is not None:
             self.right_dna_editor.draw()
+        assert self.tree_window is not None
         self.tree_window.draw()
 
         self.flip()
