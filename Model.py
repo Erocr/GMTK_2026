@@ -153,7 +153,6 @@ class Model:
 
     def fill_animals(self):
         last_gen = self.tree.get_last_gen()
-        print(len(last_gen))
         for spec in last_gen:
             x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
             y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
