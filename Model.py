@@ -160,9 +160,9 @@ class Model:
             self.animals.append(Animal(Vec(x, y), spec))
             # pour afficher les espèces dans la liste de choix de l'arbre généalogique
             for i in range(0,len(self.unlocked_species),8):
-                x = 157*len(self.unlocked_species)
+                x = 157*i
                 for j in range(i,i+8):
-                    spec.set_pos(Vec(x, 296*len(self.unlocked_species)))
+                    spec.set_pos(Vec(x,296*j))
                     print(spec.pos)
             self.unlocked_species.append(spec)
 
