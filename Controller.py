@@ -125,6 +125,7 @@ class Controller:
 
             if self.view.model.dna_1 is not None and self.view.left_dna_editor is not None:
                 index = self.view.model.dna_1.dna_clicked(self.inputHandler.mouse_pos)
+                self.view.left_dna_editor.modify_dna(index)
 
                 # print(index) ???
             if self.model.score == 32:
