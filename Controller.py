@@ -90,6 +90,7 @@ class Controller:
             if self.opened_box and spec.pos.x < mouse_pos.x and spec.pos.x + self.model.ANIMAL_IN_GRAPH_SIZE.x > mouse_pos.x and spec.pos.y < mouse_pos.y and spec.pos.y + self.model.ANIMAL_IN_GRAPH_SIZE.y > mouse_pos.y:
                 self.opened_box.update_spec = spec
                 self.opened_box = None
+                self.view.list_species_opened = False
                 s2 = None
                 for i in range(len(self.tree_window.boxes)):
                     if self.tree_window.boxes[i].spec and self.tree_window.boxes[i].spec ==  spec:
@@ -110,11 +111,9 @@ class Controller:
         if self.inputHandler.pressed("mouse_left"):
             if self.view.list_species_opened:
                 self.specie_chosen(self.inputHandler.mouse_pos)
-            elif self.tree_window.opened:
+            if self.tree_window.opened:
                 self.box_clicked(self.inputHandler.mouse_pos)
-            elif self.view.list_species_opened:
-                self.specie_chosen(self.inputHandler.mouse_pos)
-            elif not self.tree_window_clicked(self.inputHandler.mouse_pos):
+            if not self.tree_window_clicked(self.inputHandler.mouse_pos):
                 self.search_animal(self.inputHandler.mouse_pos)
 
             for button in self.buttons_left:
