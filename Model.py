@@ -9,12 +9,14 @@ from itertools import combinations
 
 class Model:
     SCREEN_SIZE = Vec(1920, 1280)
+    ANIMAL_SIZE_RATIO = 0.6
+    ANIMAL_SIZE = Vec(743, 458) * ANIMAL_SIZE_RATIO
 
     def __init__(self):
         self.SCREEN_LENGTH = 1280
         self.SCREEN_WIDTH = 1920
         self.tree = None
-        self.animals = []
+        self.animals : list[Animal] = []
         self.dna_image = {}
         self.images = []
         self.dna_set_up()
@@ -31,10 +33,10 @@ class Model:
         tail = BodyPart(self.get_random_seq("tail"))
 
         # create animals
-        specie = Specie(head, torso, legs, tail, self)
+        specie = Specie(head, legs, torso, tail, self)
         # ancestor = Animal(Vec(0, 0), specie)
         self.tree = Tree(specie)
-        self.create_children(self.tree, specie, 20)
+        self.create_children(self.tree, specie, 4)
         self.fill_animals()
 
     def update(self):
@@ -93,16 +95,15 @@ class Model:
 
         #Take all the dna sequences linked to the body part
         dna = []
-        dict = self.get_dna_image()
-        for elt in dict:
+        for elt in self.dna_image:
             #Récupération de la string
             p = ""
-            for char in dict[elt]:
-                if char == '_': break
-                else: p += char
+            for charact in self.dna_image[elt]:
+                if charact == '_': break
+                else: p += charact
             #add if it's the good part
-            if p == part : dna.append(elt)
-        a = dna[randint(0, len(dna)-1)]
+            if p == part : 
+                dna.append(elt)
         return dna[randint(0, len(dna)-1)]
 
     def create_children(self, tree:Tree, ancestor, etage, children = None):
@@ -113,15 +114,12 @@ class Model:
         else:
             waiting_children = []
             kid1, kid2 = self.create_kid(ancestor)
-            """ for elt in kid1.list_body_parts:
-                print(kid1.list_body_parts[elt].active_sec, kid2.list_body_parts[elt].active_sec)
-            print('\n') """
             tree.add_animal(kid1, ancestor)
             tree.add_animal(kid2, ancestor)
             children.append(kid1)
             children.append(kid2)
             waiting_children.append(kid1)
-            children.append(kid2)
+            waiting_children.append(kid2)
             for kid in waiting_children:
                 self.create_children(tree, kid, etage-1, children)
 
@@ -151,7 +149,8 @@ class Model:
 
     def fill_animals(self):
         last_gen = self.tree.get_last_gen()
+        print(len(last_gen))
         for spec in last_gen:
-            x = randint(0, self.SCREEN_SIZE.x - 743)  # 743 is the width of an animal
-            y = randint(0, self.SCREEN_SIZE.y - 458)  # 458 is the height of an animal
+            x = randint(0, self.SCREEN_SIZE.x - int(Model.ANIMAL_SIZE.x))
+            y = randint(0, self.SCREEN_SIZE.y - int(Model.ANIMAL_SIZE.y))
             self.animals.append(Animal(Vec(x, y), spec))
