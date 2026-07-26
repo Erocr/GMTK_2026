@@ -99,7 +99,7 @@ class Controller:
                         else:
                             s2 = self.tree_window.boxes[i+1]
 
-                if s2 and self.model.tree.get_direct_ancestor(spec, s2) is not None:
+                if s2 is not None and self.model.tree.get_direct_ancestor(spec, s2) is not None:
                     self.model.score += 2
                 
 
