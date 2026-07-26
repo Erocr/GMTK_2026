@@ -1,6 +1,8 @@
 import time
 
 import pygame as pg
+
+from Button import GenericButton
 from Vec import *
 import os
 from Animal import Animal
@@ -8,7 +10,7 @@ from Model import Model
 
 
 class View:
-    def __init__(self, model):
+    def __init__(self, model: Model):
         self.model = model
 
         self.screen_size_full = Vec(1920, 1280)
@@ -34,6 +36,9 @@ class View:
 
         self.left_dna_editor = None
         self.right_dna_editor = None
+        self.last_edit = "right"
+
+        self.buttons: list[GenericButton] = []
         self.tree_window = None
         self.list_species_opened = False
 
@@ -59,6 +64,8 @@ class View:
             if self.is_animal_image(image_name):
                 screen_ratio *= Model.ANIMAL_SIZE_RATIO
             self.images[image_name] = pg.transform.scale_by(self.images_full[image_name], screen_ratio.get()).convert_alpha()
+
+            self.images[image_name+"_mini"] = pg.transform.scale_by(self.images_full[image_name], (self.screen_ratio * Model.ANIMAL_IN_GRAPH_SIZE_RATIO).get()).convert_alpha()
 
         for body_part in self.body_parts_ordered:
             for i in range(5):
@@ -102,6 +109,9 @@ class View:
     def draw_image(self, image_name: str, pos):
         self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get())
 
+    def draw_image_with_effect(self, image_name: str, pos):
+        self.screen.blit(self.images[image_name], (pos*self.screen_ratio).get(), special_flags=pg.BLEND_ADD)
+
     def draw_anim(self, anim, index, pos):
         self.screen.blit(self.animations[anim][index], (pos*self.screen_ratio).get())
 
@@ -130,7 +140,7 @@ class View:
                 if key == "legs" and animal.is_moving():
                     anim_i = (time.time() - animal.startMovementTime) / animal.LEG_ANIM_FRAME_DURATION
                     anim_i = int(anim_i)
-                    anim_i = anim_i % 13
+                    anim_i = anim_i % 14
                     anim = self.model.get_image(animal.list_body_parts[key].active_sec)
                     if anim[:4] != "legs":
                         continue
@@ -175,8 +185,23 @@ class View:
                 self.draw_specie(specie)
                 print(specie.pos)
 
+        for button in self.buttons:
+            self.draw_image(button.image, button.pos)
+
         self.flip()
 
     def flip(self):
         pg.display.flip()
         self.draw_image("background_terrarium_v1", Vec(0, 0))
+
+    def get_button(self, name):
+        for button in self.buttons:
+            if button.name == name:
+                return button
+
+    def add_button(self, button):
+        if button.name in [b.name for b in self.buttons]:
+            for i in reversed(range(len(self.buttons))):
+                if self.buttons[i].name == button.name:
+                    self.buttons.pop(i)
+        self.buttons.append(button)

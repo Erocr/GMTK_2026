@@ -17,7 +17,6 @@ def play():
     controller = Controller(model, view)
 
 
-
     FPS = 60
     LOOP_TIME = 1 / FPS
 
@@ -28,7 +27,6 @@ def play():
         controller.update()
         model.update()
         view.draw()
-
         # Freeze the FPS
         end = time.time()
         if end - start < LOOP_TIME:
