@@ -140,6 +140,10 @@ class View:
         else:
             pass
 
+    def draw_specie(self,specie):
+        for key in specie.list_body_parts.keys():
+            self.draw_image(self.model.get_image(specie.list_body_parts[key].active_sec), specie.pos)
+
     def open_list_species(self):
         self.list_species_opened = True
 
@@ -167,6 +171,8 @@ class View:
         self.tree_window.draw()
         if self.list_species_opened:
             self.draw_image("empty_window",Vec(0,0))
+            for specie in self.model.unlocked_species:
+                self.draw_specie(specie)
 
         self.flip()
 
